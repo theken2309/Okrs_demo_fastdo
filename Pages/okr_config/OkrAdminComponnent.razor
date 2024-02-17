@@ -1,0 +1,284 @@
+﻿@page "/Admin"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+<div class="card flex_column is_fullheight" style="flex:1;overflow:hidden; margin:15px">
+    <!--!--><!--!--><!--!--><!--!--><ul class="columns is-vcentered is-variable is-2 mb-2">
+        <!--!-->
+        <li class="column">
+            <h1 class="title is-5 has-text-info is-uppercase">
+                Danh sách chu kỳ
+            </h1>
+        </li>
+        <li class="column is-narrow" @onclick="AddCK"  >
+            <a class="button">
+                <!--!--><span class="icon"><span class="material-icons-outlined is-size-6">add</span></span>
+                <!--!--><span>Thêm mới</span>
+            </a>
+        </li>
+    </ul><!--!-->
+    <div class="scrolly inner_section" style="flex:1">
+        <table class="table is-fullwidth is-vcentered is-responsive">
+            <!--!-->
+            <thead>
+                <tr>
+                    <th class="pt-0">Tên chu kỳ</th>
+                    <th class="pt-0" width="20%">Ngày bắt đầu</th>
+                    <th class="pt-0" width="20%">Ngày kết thúc</th>
+                    <th class="pt-0" width="20%">Trạng thái</th>
+                    <th class="pt-0" width="70px" align="center">Xử lý</th>
+                </tr>
+            </thead>
+            <tbody>
+              
+                @foreach (var Listokr_config in list_okrconfig)
+                {
+                    @foreach (var cycle in Listokr_config.cycles)
+                    {
+                        <tr>
+                            <td><span class="has-text-weight-semibold"> "@cycle.name"</span></td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Bắt đầu</label>
+                                <div class="td-value"> "@(new DateTime(cycle.start).ToString("dd/MM/yyyy"))" </div>
+                            </td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Kết thúc</label>
+                                <div class="td-value"> "@(new DateTime(cycle.end).ToString("dd/MM/yyyy"))" </div>
+
+                            </td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Trạng thái</label>
+                                @if (cycle.done == false)
+                                {
+                                    <div class="td-value"><!--!--><span class="tag is-success">Đang thực hiện</span></div>
+                                }
+                                else
+                                {
+                                    <div class="td-value"><!--!--><span class="tag is-primary">Đã Hoàn Thành</span></div>
+
+                                }
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Xử lý</label>
+                                <div class="td-value">
+                                    <a class="icon has-text-link" title="Chỉnh sửa" @onclick="@(e=>Edit(cycle,Listokr_config))">
+                                        <!--!--><i class="material-icons-outlined is-size-5">
+                                            edit
+                                        </i>
+                                    </a><!--!-->
+                                    <a class="icon has-text-danger" title="Xóa" @onclick="@(e=>DeleteCyc(cycle,Listokr_config))" >
+                                        <!--!--><i class="material-icons-outlined is-size-5">
+                                            delete
+                                        </i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+               
+            </tbody>
+        </table>
+    </div>
+</div>
+@*form them chu kì *@
+@if (add==true)
+{
+<div class="modal is-active">
+    <!--!--><div class="modal-background"></div>
+    <div class="modal-card">
+        <div class="modal-card-head">
+            <div class="modal-card-title">Tạo chu kỳ mới</div><!--!-->
+            <a class="delete"></a>
+        </div><!--!-->
+        <form class="modal-card-body">
+            <div class="field">
+                <!--!--><label class="label">Tên chu kỳ *</label>
+                <div class="control"><input type="text" class="input"  @bind ="@cyc.name" ></div>
+            </div><!--!-->
+                <div class="field">
+                    <label class="label">Trạng thái</label>
+                    <div class="control">
+                        <label class="radio">
+                            <input type="radio" name="status" value="false" @onchange="() => cyc.done = false">
+                            <span class="ml-1">Đang thực hiện</span>
+                        </label>
+                        <label class="radio mr-3">
+                            <input type="radio" name="status" value="true" @onchange="() => cyc.done = true">
+                            <span class="ml-1">Đã hoàn thành</span>
+                        </label>
+                    </div>
+                </div>
+
+
+            <div class="field is-grouped" style="margin-bottom:320px">
+                <div class="control">
+                    <!--!--><label class="label">Ngày bắt đầu *</label>
+                        <input type="date" value="@(DateTime.Now.ToString("yyyy'-'MM'-'dd"))" @onchange="(e) => GetDateTime(e)" />
+                        @*<input type="date" @bind="TimeStart" />*@
+                </div><!--!-->
+                <div class="control is-expanded is-hidden-mobile"></div>
+                <div class="control">
+                    <!--!--><label class="label">Ngày kết thúc *</label>
+                        <input type="date" value="@(DateTime.Now.AddMonths(3).ToString("yyyy'-'MM'-'dd"))" @onchange="(e) => GetDateTimeEnd(e)" />
+
+                </div>
+            </div><!--!-->
+            <div class="field mt-5">
+                <div class="buttons is-right">
+                    <a class="button" @onclick = "AddCK" >
+                        <!--!-->
+                        Hủy
+                    </a><!--!-->
+                    <a class="button is-link">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                        <!--!--><span @onclick = "@(e=>Create(okr_config))" >Cập nhật</span>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+}
+@*form edit chu kỳ *@
+@if (edit == true)
+{
+    <div class="modal is-active">
+        <!--!--><div class="modal-background"></div>
+        <div class="modal-card">
+            <div class="modal-card-head">
+                <div class="modal-card-title">Tạo chu kỳ mới</div><!--!-->
+                <a class="delete"></a>
+            </div><!--!-->
+            <form class="modal-card-body">
+                <div class="field">
+                    <!--!--><label class="label">Tên chu kỳ *</label>
+                    <div class="control"><input type="text" class="input" @bind="@cyc.name"></div>
+                </div><!--!-->
+                <div class="field">
+                    <label class="label">Trạng thái</label>
+                    <div class="control">
+                        <label class="radio">
+                            <input type="radio" name="status" value="false" @onchange="() => cyc.done = false">
+                            <span class="ml-1">Đang thực hiện</span>
+                        </label>
+                        <label class="radio mr-3">
+                            <input type="radio" name="status" value="true" @onchange="() => cyc.done = true">
+                            <span class="ml-1">Đã hoàn thành</span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="field is-grouped" style="margin-bottom:320px">
+                    <div class="control">
+                        <!--!--><label class="label">Ngày bắt đầu *</label>
+                        <input type="date" value="@(new DateTime(cyc.start).ToString("yyyy'-'MM'-'dd"))" @onchange="(e) => GetDateTime(e)" />
+
+                    </div><!--!-->
+                    <div class="control is-expanded is-hidden-mobile"></div>
+                    <div class="control">
+                        <!--!--><label class="label">Ngày kết thúc *</label>
+                        <input type="date" value="@(new DateTime(cyc.end).ToString("yyyy'-'MM'-'dd"))" @onchange="(e) => GetDateTimeEnd(e)" />
+
+                    </div>
+                </div><!--!-->
+                <div class="field mt-5">
+                    <div class="buttons is-right">
+                        <a class="button" @onclick="outEdit">
+                            <!--!-->
+                            Hủy
+                        </a><!--!-->
+                        <a class="button is-link">
+                            <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                            <!--!--><span @onclick="EditReal">Cập nhật ne </span>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+@code {
+    List<okrConfigModel.Cycle> listCyc = new();
+    private bool add,edit = false;
+    okrConfigModel.Cycle cyc;
+    okrConfigModel okr_config = new();
+    List<okrConfigModel> list_okrconfig = new();
+    protected override async void OnInitialized()
+    {
+        list_okrconfig = await DbOkrConfig.GetAll();
+
+    }
+    public void AddCK()
+    {
+        Console.WriteLine("click add");
+        cyc = new();
+        add = !add;
+    }
+    public void editCyc()
+    {
+        edit = !edit;
+    }
+    public void outEdit()
+    {
+        navigation.NavigateTo(navigation.Uri, true);
+    }
+    public async void Create(okrConfigModel okr)
+    {
+
+        // Tạo đối tượng okrConfigModel
+        var okrConfig = new okrConfigModel
+            {
+                id = "241I20974A", // Đặt giá trị _id tương ứng với okrConfig cần cập nhật
+                                    // Các thuộc tính khác của okrConfig
+            };
+
+        // Tạo đối tượng okrConfigModel.Cycle để thêm vào mảng cycles
+
+        // Gọi hàm AddCycleToOkr từ DbOkrConfig để thêm Cycle vào okrConfig
+        DbOkrConfig.AddCycleToOkr(okrConfig, cyc);
+        okrConfig = new();
+        list_okrconfig = await DbOkrConfig.GetAll();
+        add = !add;
+
+    }
+    public void Edit(okrConfigModel.Cycle cycupdate, okrConfigModel okrupdate)
+    {
+        editCyc();
+        cyc = cycupdate;
+        okr_config = okrupdate;
+        Console.WriteLine(okr_config.id + " se sua cai nay ");
+    }
+    public void EditReal(){
+        DbOkrConfig.UpdateCycleInOkr(okr_config, cyc.id, cyc);
+        edit = !edit;
+    }
+    //chọn time 
+    private void GetDateTime(ChangeEventArgs e)
+    {
+        var time = DateTime.Parse(e.Value.ToString());
+        Console.WriteLine(time.Ticks);
+
+        cyc.start = time.Ticks;
+    }
+    private void GetDateTimeEnd(ChangeEventArgs e)
+    {
+        var time = DateTime.Parse(e.Value.ToString());
+        Console.WriteLine(time.Ticks);
+        cyc.end = time.Ticks;
+    }
+    //xoá
+    public async void DeleteCyc(okrConfigModel.Cycle cycDelete, okrConfigModel okrDelete)
+    {
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Bạn có chắc muốn xóa kết quả then chốt: {cycDelete.name} ?"))
+            return;
+        DbOkrConfig.DeleteCycleInOkr(okrDelete, cycDelete.id);
+        navigation.NavigateTo(navigation.Uri, true);
+
+        
+    }
+
+
+
+}

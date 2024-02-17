@@ -1,0 +1,457 @@
+﻿@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+
+@*Trang Thêm Mới đánh giá *@
+<div class="" b-82z1cy6rii="">
+    <table class="table is-fullwidth is-vcentered is-noborder is-responsive" b-82z1cy6rii="">
+        <!--!-->
+        <thead b-82z1cy6rii="">
+            <tr class="is-size-7" style="border-bottom: 1px solid #DEDEDE;" b-82z1cy6rii="">
+                <th class="pt-0" b-82z1cy6rii="">Mục tiêu</th>
+                <th class="pt-0" width="150px" align="center" b-82z1cy6rii="">Tiến độ</th>
+                <th class="pt-0" width="120px" align="center" b-82z1cy6rii="">Điểm hệ thống</th>
+                <th class="pt-0" width="120px" align="center" b-82z1cy6rii="">Tự đánh giá</th>
+                <th class="pt-0" width="120px" align="center" b-82z1cy6rii="">QL đánh giá</th>
+            </tr>
+        </thead>
+        <tbody b-82z1cy6rii="">
+            <tr b-82z1cy6rii="">
+                <td b-82z1cy6rii=""><span class="has-text-weight-semibold has-text-link" b-82z1cy6rii=""> @okr_ne.name  </span></td><!--!-->
+                <td b-82z1cy6rii="">
+                    <!--!--><label class="td-label" b-82z1cy6rii="">Tiến độ</label>
+                    <div class="td-value" b-82z1cy6rii="">
+                        <div class="progress_has_value" b-82z1cy6rii="">
+                            <progress class="progress is-small is-dark" value="0" max="100" b-82z1cy6rii=""></progress><!--!-->
+                            <span b-82z1cy6rii="">0%</span>
+                        </div>
+                    </div>
+                </td><!--!-->
+                <td align="center" b-82z1cy6rii="">
+                    <!--!--><label class="td-label" b-82z1cy6rii="">Điểm hệ thống</label>
+                    <div class="td-value" b-82z1cy6rii="">
+                        <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                            @if (okr_checkin.id != null)
+                            {
+                               @siuu(CalPercent(),CalPercentTagert())
+                            }
+                            else
+                                @siuu(CalPercentKey(),CalPercentTagert())
+   
+                                <!--!-->%
+                        </div>
+                    </div>
+                </td><!--!-->
+                <td align="center" b-82z1cy6rii="">
+                    <!--!--><label class="td-label" b-82z1cy6rii="">Tự đánh giá</label>
+                    <div class="td-value" b-82z1cy6rii="">
+                        <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                            @if (okr_checkin.id != null)
+                            {
+                                @CalYou()
+                                
+                            }
+                            else @CalYouKey()
+
+                            <!--!-->%
+                        </div>
+                    </div>
+                </td><!--!-->
+                <td align="center" b-82z1cy6rii="">
+                    <!--!--><label class="td-label" b-82z1cy6rii="">QL đánh giá</label>
+                    <div class="td-value" b-82z1cy6rii="">
+                        <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                            0<!--!-->%
+                        </div>
+                    </div>
+                </td>
+            </tr><!--!-->
+            <tr b-82z1cy6rii="">
+                <td colspan="5" class="td-block" b-82z1cy6rii="">
+                    <div class="field" b-82z1cy6rii="">
+                        <!--!--><label class="label" b-82z1cy6rii="">Nhân sự nhận xét OKRs</label>
+                        <div class="control" b-82z1cy6rii=""><textarea @bind ="okr_rv.staff_comment"  class="textarea is_bg" rows="2" placeholder="Nhập nhận xét của bạn" b-82z1cy6rii=""></textarea></div>
+                    </div>
+                </td>
+            </tr><!--!-->
+            <tr class="is-hidden-mobile" b-82z1cy6rii=""><td colspan="5" b-82z1cy6rii=""><hr class="m-0" b-82z1cy6rii=""></td></tr>
+            <!--!-->
+            <tr class="has-text-grey is-hidden-mobile" b-82z1cy6rii="">
+                <td class="pl-6" b-82z1cy6rii="">Kết quả then chốt</td>
+                <td align="center" b-82z1cy6rii="">Đạt được</td>
+                <td align="center" b-82z1cy6rii="">Điểm hệ thống</td>
+                <td align="center" b-82z1cy6rii="">Tự đánh giá</td>
+                <td align="center" b-82z1cy6rii="">QL đánh giá</td>
+            </tr>
+            @if (okr_checkin.id == null)
+            {
+                @foreach( var KeyR in okr_ne.key_results)
+                {
+                    <tr b-82z1cy6rii="">
+                        <td class="pl-6" b-82z1cy6rii=""><span class="has-text-weight-semibold has-text-link" b-82z1cy6rii=""> @KeyR.name </span></td><!--!-->
+                        <td b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">Tiến độ</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <span class="has-text-success" b-82z1cy6rii=""> @KeyR.result / @KeyR.target</span><!--!-->
+                                <span class="is-pulled-right" b-82z1cy6rii=""> @KeyR.unit </span>
+                            </div>
+                        </td><!--!-->
+                        <td align="center" b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">Điểm hệ thống</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                                     @siuu(KeyR.result,KeyR.target) <!--!-->%
+                                </div>
+                            </div>
+                        </td><!--!-->
+                        <td align="center" b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">Tự đánh giá</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <div class="control has-icons-right" b-82z1cy6rii="">
+                                    <input placeholder="Nhập số điểm" type="number" @bind="KeyR.review_data.staff_point"  class="input has-text-centered has-text-weight-semibold is_bg" b-82z1cy6rii=""><!--!-->
+                                    <!--!--><span class="icon is-right has-text-dark" b-82z1cy6rii="">%</span>
+                                </div>
+                            </div>
+                        </td><!--!-->
+                        <td align="center" b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii=""  >QL đánh giá</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                                    @KeyR.review_data.manager_point %
+                                </div>
+                            </div>
+                        </td>
+                    </tr><!--!-->
+                    <tr b-82z1cy6rii="">
+                        <td colspan="5" class="pl-6 td-block" b-82z1cy6rii="">
+                            <div class="field" b-82z1cy6rii="">
+                                <!--!--><label class="label" b-82z1cy6rii="">Nhân sự nhận xét KRs</label>
+                                <div class="control" b-82z1cy6rii=""><textarea @bind = "KeyR.review_data.staff_comment" class="textarea is_bg" rows="2" placeholder="Nhập nhận xét của bạn" b-82z1cy6rii=""></textarea></div>
+                            </div>
+                        </td>
+                    </tr><!--!-->
+                    <tr class="is-hidden-mobile" b-82z1cy6rii=""><td colspan="5" b-82z1cy6rii=""><hr class="m-0" b-82z1cy6rii=""></td></tr>
+                    @if (string.IsNullOrEmpty(KeyR.review_data.staff_comment)) checkKR = false; else checkKR = true;
+
+
+            }
+            }
+            else
+            {
+                @foreach (var KeyR in okr_checkin.key_results)
+                {
+
+                    <tr b-82z1cy6rii="">
+                        <td class="pl-6" b-82z1cy6rii=""><span class="has-text-weight-semibold has-text-link" b-82z1cy6rii=""> @KeyR.name </span></td><!--!-->
+                        <td b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">Tiến độ</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <span class="has-text-success" b-82z1cy6rii="">@KeyR.result/@KeyR.target </span><!--!-->
+                                <span class="is-pulled-right" b-82z1cy6rii=""> @KeyR.unit </span>
+                            </div>
+                        </td><!--!-->
+                        <td align="center" b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">Điểm hệ thống</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                                     @siuu(KeyR.result,KeyR.target) <!--!-->%
+                                </div>
+                            </div>
+                        </td><!--!-->
+                        <td align="center" b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">Tự đánh giá</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <div class="control has-icons-right" b-82z1cy6rii="">
+                                    <input placeholder="Nhập số điểm" type="number" @bind = "KeyR.staff_point" class="input has-text-centered has-text-weight-semibold is_bg" b-82z1cy6rii=""><!--!-->
+                                    <!--!--><span class="icon is-right has-text-dark" b-82z1cy6rii="">%</span>
+                                </div>
+                            </div>
+                        </td><!--!-->
+                        <td align="center" b-82z1cy6rii="">
+                            <!--!--><label class="td-label" b-82z1cy6rii="">QL đánh giá</label>
+                            <div class="td-value" b-82z1cy6rii="">
+                                <div class="input is-centered has-text-weight-semibold is_bg" b-82z1cy6rii="">
+                                     @KeyR.manager_point <!--!-->%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!--!-->
+                    <tr b-82z1cy6rii="">
+                        <td colspan="5" class="pl-6 td-block" b-82z1cy6rii="">
+                            <div class="field" b-82z1cy6rii="">
+                                <!--!--><label class="label" b-82z1cy6rii="">Nhân sự nhận xét KRs</label>
+                                <div class="control" b-82z1cy6rii=""><textarea @bind="KeyR.staff_comment" class="textarea is_bg" rows="2" placeholder="Nhập nhận xét của bạn" b-82z1cy6rii=""></textarea></div>
+                            </div>
+                        </td>
+                    </tr>
+                    @if (string.IsNullOrEmpty(KeyR.staff_comment)) checkKR = false; else checkKR = true;
+
+                    <!--!-->
+                    <tr class="is-hidden-mobile" b-82z1cy6rii=""><td colspan="5" b-82z1cy6rii=""><hr class="m-0" b-82z1cy6rii=""></td></tr>
+                }
+
+            }
+            <tr b-82z1cy6rii="">
+                <td colspan="5" class="td-block" b-82z1cy6rii="">
+                    <!--!--><span class="has-text-weight-semibold is-size-6 has-text-info mr-2" b-82z1cy6rii="">Nhân sự phản hồi</span>
+                    <!--!--><div class="dropdown is-up is-hoverable" b-82z1cy6rii="">
+                        <div class="dropdown-trigger" b-82z1cy6rii=""><span class="icon" b-82z1cy6rii=""><i class="material-icons-outlined is-size-5" b-82z1cy6rii="">infor</i></span></div>
+                        <div class="dropdown-menu" b-82z1cy6rii="">
+                            <div class="dropdown-content" style="min-width:400px;width:fit-content" b-82z1cy6rii="">
+                                <div class="dropdown-item content" b-82z1cy6rii="">
+                                    <p class="has-text-weight-semibold" b-82z1cy6rii="">Gợi ý câu hỏi</p>
+                                    <p b-82z1cy6rii="">Bạn nhận được gì từ người quản lý của bạn mà bạn thấy hữu ích hoặc giúp đỡ bạn tốt?</p>
+                                    <p b-82z1cy6rii="">Điều gì từ người quản lý đã gây ảnh hưởng tới hoạt động OKRs này của bạn?</p>
+                                    <p b-82z1cy6rii="">Nếu quay lại thời gian, người quản lý nên làm gì để giúp bạn thành công trong OKRs này hơn?</p>
+                                    <p b-82z1cy6rii="">Các kỹ năng, năng lực tôi muốn cải thiện và tốt hơn trong tương lai?</p>
+                                    <p b-82z1cy6rii="">Điều gì từ công ty mà bạn kỳ vọng sẽ giúp ích cho việc cải thiện năng lực của bạn?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control mt-2" b-82z1cy6rii=""><textarea  @bind ="okr_rv.review_staff_comment" class="textarea is_bg" rows="2" placeholder="Nhập phản hồi của bạn" b-82z1cy6rii=""></textarea></div>
+                </td>
+            </tr>
+        </tbody>
+    </table><ul class="columns is-multiline is-variable is-2 is-mobile" b-82z1cy6rii="">
+        <li class="column is-half is-full-mobile" b-82z1cy6rii="">
+            <!--!--><div class="has-text-grey mb-2" b-82z1cy6rii="">Chọn người đánh giá</div>
+            <ul class="columns is-vcentered is-multiline is-variable is-2" b-82z1cy6rii="">
+                <li class="column is-4" b-82z1cy6rii="">
+                    <!--!--><!--!--><div id="dropdown_8fb4ed14" class="dropdown is-left is-up  ">
+                        <div class="dropdown-trigger">
+                            <a class="icon-text">
+                                <span class="has-text-link is-block" style="max-width: 200px;">Chọn phòng ban</span><!--!-->
+                                <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                            </a>
+                        </div>
+                    </div>
+                </li><!--!-->
+                <li class="column is-6" b-82z1cy6rii="">
+                    <!--!--><div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                        <select @bind="okr_ne.parent">
+                            <option> Chọn người đánh giá</option>
+                            @foreach (var use in listUser)
+                            {
+                                <option value="@use.id"> @use.nameUse </option>
+                            }
+                        </select>
+                    </div>
+                </li><!--!-->
+                <li class="column is-2" b-82z1cy6rii=""></li>
+            </ul>
+        </li><!--!-->
+        <li class="column is-half is-full-mobile" b-82z1cy6rii="">
+            <!--!--><div class="has-text-grey mb-2" b-82z1cy6rii="">Chọn người xem</div>
+            <ul class="columns is-vcentered is-multiline is-variable is-2" b-82z1cy6rii="">
+                <li class="column is-4" b-82z1cy6rii="">
+                    <!--!--><!--!--><div id="dropdown_64d3e37f" class="dropdown is-left is-up  ">
+                        <div class="dropdown-trigger">
+                            <a class="icon-text">
+                                <span class="has-text-link is-block" style="max-width: 200px;">Chọn phòng ban</span><!--!-->
+                                <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                            </a>
+                        </div>
+                    </div>
+                </li><!--!-->
+                <li class="column is-6" b-82z1cy6rii="">
+                    <!--!--><div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                        <input class="input is-rounded" type="text" placeholder="Chọn người xem" autocomplete="off"><!--!-->
+                        <!--!--><span class="icon is-left"><i class="material-icons-outlined is-size-5">search</i></span>
+                        <a class="is-hidden"><!--!--><i class="material-icons-outlined">close</i></a><!--!-->
+                        <ul class="suggest"></ul>
+                    </div>
+                </li><!--!-->
+                <li class="column is-2" b-82z1cy6rii=""></li>
+            </ul>
+        </li><!--!-->
+        <li class="column" b-82z1cy6rii="">
+            <a class="button is-info" b-82z1cy6rii="" @onclick = "SaveDraft" >
+                <!--!--><span class="icon" b-82z1cy6rii=""><i class="material-icons-outlined is-size-6" b-82z1cy6rii="">save</i></span>
+                <!--!--><span b-82z1cy6rii=""  >Lưu nháp</span>
+            </a>
+        </li><!--!-->
+        <li class="column is-narrow" b-82z1cy6rii="">
+            <a class="button is-white has-text-danger" b-82z1cy6rii="" @onclick="doanXem">
+                <!--!--><span class="icon" b-82z1cy6rii=""><i class="material-icons-outlined is-size-6" b-82z1cy6rii="">close</i></span>
+                <!--!--><span b-82z1cy6rii=""  >Hủy</span>
+            </a>
+        </li><!--!-->
+        
+        <li class="column is-narrow is-full-mobile" b-82z1cy6rii="">
+            <a class="button is-link" b-82z1cy6rii="">
+                <!--!--><span class="icon" b-82z1cy6rii=""><i class="material-icons-outlined is-size-6" b-82z1cy6rii="">fact_check</i></span>
+                <!--!--><span b-82z1cy6rii="" @onclick = "CreateDG" >Gửi đánh giá</span>
+            </a>
+        </li>
+    </ul>
+</div>
+@code {
+    bool checkKR;
+    [CascadingParameter]
+    public MainLayout layoutMain { get; set; }
+    [Parameter]
+    public OkrCheckInModel okr_checkin { get; set; }
+    [Parameter]
+    public okrModel okr_ne { get; set; }
+    Okr_reviewModel okr_rv = new();
+    List<UseModel> listUser = new();
+    //các phương thức tính
+    protected override async Task OnInitializedAsync()
+    {
+        listUser = await DbUse.GetAll();
+
+    }
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    private double CalPercent()
+    {
+        double result = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentKey()
+    {
+        double result = 0;
+
+        foreach (var key in okr_ne.key_results)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert()
+    {
+        double target = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+
+    }
+    private double CalPercentTagertKey()
+    {
+        double target = 0;
+
+        foreach (var key in okr_ne.key_results)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    private double CalYou()
+    {
+        double result = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.staff_point;
+            result += k;
+        }
+        result = result / okr_checkin.key_results.Count();
+        if (result > 100) result = 100;
+        result = Math.Round(result, 2);
+        return result;
+
+    }
+    private double CalYouKey()
+    {
+        double result = 0;
+
+        foreach (var key in okr_ne.key_results)
+        {
+            var k = key.review_data.staff_point;
+            result += k;
+        }
+        result= result / okr_ne.key_results.Count();
+        if (result > 100) result = 100;
+        result = Math.Round(result, 2);
+        return result;
+    }
+
+    //huỷ đánh giá
+    private void doanXem()
+    {
+        navigation.NavigateTo(navigation.Uri, true);
+    }
+    //gửi đánh giá OKR đó 
+    private async void CreateDG()
+    {
+       
+         if (okr_ne.review_data.staff_point == null)
+        {
+           await JSRuntime.InvokeVoidAsync("tagline", false, "Nhập điểm đánh giá của bạn!");
+
+        }
+        else if (okr_rv.staff_comment == null)
+        {
+           await JSRuntime.InvokeVoidAsync("tagline", false, "Hãy nhận nhập xét của bạn");
+
+        }
+        else if (okr_rv.review_staff_comment == null)
+        {
+           await JSRuntime.InvokeVoidAsync("tagline", false, "Hãy nhận nhập xét của bạn");
+        }
+        else if (okr_ne.parent == null)
+        {
+           await JSRuntime.InvokeVoidAsync("tagline", false, "Vui lòng chọn người đánh giá");
+
+        }
+        else if(checkKR == false)
+        {
+           await JSRuntime.InvokeVoidAsync("tagline", false, "Hãy nhận nhập xét của bạn");
+
+        }
+        else if (okr_ne.parent == layoutMain.IdU)
+        {
+           await JSRuntime.InvokeVoidAsync("tagline", false, "Bạn không thể gửi bản đánh giá cho chính mình");
+
+        }
+        else
+        {
+            if (!await JSRuntime.InvokeAsync<bool>("confirm", $" Xác thực tạo checkin nháp ?  ?"))
+                return;
+            okr_rv.okrID = okr_ne.id;
+            okr_rv.review_send_date = DateTime.Now.Ticks;
+            okr_rv.review_send_status = 2;
+            okr_ne.review_send_date = DateTime.Now.Ticks;
+            okr_checkin.review_send_date = DateTime.Now.Ticks;
+            DbOkr.Update(okr_ne);
+            DbOkrCheckin.Update(okr_checkin);
+            DbOkrReview.CreateOrUpdate(okr_rv);
+            navigation.NavigateTo(navigation.Uri, true);
+            JSRuntime.InvokeVoidAsync("tagline", true, "Tạo đánh giá thành công");
+
+        }
+        
+    }
+    //lưu đánh giá nháp
+    private void SaveDraft()
+    {
+        okr_rv.okrID = okr_ne.id;
+        okr_rv.review_send_status =1;
+        okr_checkin.review_send_date = DateTime.Now.Ticks;
+        DbOkr.Update(okr_ne);
+        DbOkrCheckin.Update(okr_checkin);
+        DbOkrReview.CreateOrUpdate(okr_rv);
+        navigation.NavigateTo(navigation.Uri, true);
+    }
+
+}

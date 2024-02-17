@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager navigation
+@inject IJSRuntime JSRuntime
+
+<PageTitle>OKRs_Fastdo</PageTitle>
+
+
+    <CascadingValue Value="this">
+        <main id="main" class="columns is-gapless is-multiline">
+            <section class="column is-full">
+                <HeaderMain />
+            </section>
+            <section class="column is-full">
+                <div class="columns is-variable is-0 is-multiline" id="okr">
+                    <Sidebar />
+                @if (!string.IsNullOrEmpty(IdU))
+                {
+                    @Body
+                }
+                </div>
+            </section>
+        </main>
+    </CascadingValue>
+@code{
+    public string IdU;
+    public string cycid;
+    public string userNameLogin;
+    public string quyen;
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            string userID = await JSRuntime.InvokeAsync<string>("getCookie", "_user");
+            string userName = await JSRuntime.InvokeAsync<string>("getCookie", "_UserName");
+            string userQuyen = await JSRuntime.InvokeAsync<string>("getCookie", "_userQuyen");
+            if (userID == null)
+            {
+                navigation.NavigateTo("/");
+            }
+            else
+            {
+                IdU = userID;
+                userNameLogin = userName;
+                quyen = userQuyen;
+
+                StateHasChanged();
+            }
+        }
+    }
+
+    public void ChangeCycle(string id)
+    {
+        cycid = id;
+        Console.WriteLine("nhan duoc cyc la : " + cycid);
+        StateHasChanged();
+    }
+}

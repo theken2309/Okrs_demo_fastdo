@@ -1,0 +1,348 @@
+﻿@page "/okr"  
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+<main id="main" class="columns is-gapless is-multiline">
+    <section class="column is-full">
+    </section>
+    <section class="column is-full">
+        <div class="columns is-variable is-0 is-multiline" id="okr">
+            <section id="content" class="column has_sidebar ">
+                <!--!--><!--!--><!--!--><!--!-->
+                <section class="main_content">
+                    <div class="card flex_column">
+                        <ul class="columns is-vcentered is-variable is-2 is-mobile mb-2">
+                            <!--!-->
+                            <li class="column">
+                                <h1 class="title is-5 is-size-6 has-text-info">
+                                    OKRs - CÁ NHÂN
+                                </h1>
+                            </li>
+                            <li class="column is-narrow" @onclick="addOKR">
+                                <a class="button">
+                                    <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">add</i></span>
+                                    <!--!--><span>Thêm OKRs</span>
+                                </a>
+                            </li>
+                        </ul><!--!-->
+                        <div class="inner_section mb-5">
+                            <table class="table is-fullwidth is-noborder is-responsive">
+                                <!--!-->
+                                <thead>
+                                    <tr class="is-size-7" style="border-bottom: 1px solid #DEDEDE;">
+                                        <th class="pt-0">Mục tiêu</th>
+                                        <th class="pt-0" width="160px">Kết Quả Then Chốt</th>
+                                        <th class="pt-0" width="200px" align="center">Tiến độ</th>
+                                        <th class="pt-0" width="100px" align="center">Thay đổi</th>
+                                        <th class="pt-0" width="100px" align="center">Ngày tạo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <_OkrComponent listOkr="listork" />
+
+                                </tbody>
+                            </table>
+                        </div><!--!-->
+                        <ul class="columns is-vcentered is-variable is-2 is-mobile mb-2">
+                            <!--!-->
+                            <li class="column">
+                                <h1 class="title is-5 is-size-6 has-text-info">
+                                    TIẾN ĐỘ OKRs
+                                </h1>
+                            </li>
+                        </ul><!--!-->
+                        <div style="min-height: 210px;flex:1" class="inner_section pt-6"><!--!--><canvas id="lineChartCanvas" height="381" style="display: block; box-sizing: border-box; height: 338.667px; width: 1550.22px;" width="1744"></canvas></div>
+                    </div>
+                </section>
+                @*khi mở form tạo *@
+                @if (a == true)
+                {
+                    <div class="slider is-large is-active" style="height:850px">
+                        <div class="slider-header">
+                            <div class="columns is-variable is-2 is-mobile is-vcentered">
+                                <div class="column"><div class="has-text-weight-bold is-size-5">TẠO OKRs MỚI</div></div><!--!-->
+                                <div class="column is-narrow">
+                                    <!--!--><button class="button" @onclick="Cancle">
+                                        <span class="icon">
+                                            <span class="material-icons-outlined">close</span>
+                                        </span>
+                                        <span>Hủy tạo</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!--!-->
+                        <div class="slider-body">
+                            <div class="scrolly is-mobile is-flex is-flex-direction-column">
+                                <ul class="columns is-multiline is-vcentered is-mobile is-variable is-2">
+                                    <!--!-->
+                                    <li class="column is-one-fifth-tablet is-full-mobile"><label class="label has-text-weight-bold">Mục tiêu của bạn:</label></li>
+                                    <li class="column is-four-fifths-tablet is-full-mobile">
+                                        <input type="text" class="input has-text-weight-semibold is_bg" placeholder="Bắt buộc nhập..." @bind="okr.name">
+                                    </li><!--!-->
+                                    <!--!-->
+                                    <li class="column is-one-fifth-tablet is-one-third-mobile">
+                                        <label class="label has-text-weight-bold">OKRs cấp trên</label>
+                                    </li>
+                                    <li class="column is-two-fifths-tablet is-two-thirds-mobile">
+                                        <div class="select is-fullwidth is_bg">
+                                            <select >
+                                               
+                                            </select>
+                                        </div>
+                                    </li><!--!-->
+                                    <li class="column is-one-fifth-tablet is-full-mobile">
+                                        <div class="field is-grouped">
+                                            <!--!--><div class="control"><label class="label has-text-weight-bold">Loại:</label></div>
+                                            <div class="control is-expanded"><div class="select is-fullwidth is_bg">
+                                                <select @bind = "okr.type" >
+                                                <option value="2">OKRs cam kết</option>
+                                                <option value="1">OKRs mở rộng</option>
+                                            </select></div></div>
+                                        </div>
+                                    </li><!--!-->
+                                    <!--!-->
+                                    <li class="column is-full"><hr class="m-0"></li>
+                                </ul><!--!-->
+                                @foreach (var kr in okr.key_results)
+                                {
+                                    var index = okr.key_results.FindIndex(x => x.id == kr.id);
+
+                                    <ul class="columns is-multiline is-mobile is-variable is-2">
+                                        <!--!-->
+                                        <li class="column is-one-fifth-tablet is-full-mobile"><label class="label pt-2">Kết quả then chốt:</label></li>
+                                        <li class="column is-four-fifths-tablet is-full-mobile">
+                                            <div class="field has-addons">
+                                                <div class="control is-expanded">
+                                                    <input type="text" class="input is_bg" placeholder="Bắt buộc nhập..." @bind="kr.name">
+                                                </div><!--!-->
+                                                <div class="control"><a class="button is-danger" title="Xóa kết quả then chốt" @onclick="(e)=>DeleteKey(kr)"><!--!--><span class="icon"><i class="material-icons-outlined is-size-5">close</i></span></a></div>
+                                            </div>
+                                        </li><!--!-->
+                                        <!--!-->
+                                        <li class="column is-one-fifth-tablet is-one-third-mobile"><label class="label pt-2">Mục tiêu:</label></li>
+                                        <li class="column is-two-fifths-tablet is-two-thirds-mobile">
+                                            <div class="field is-grouped">
+                                                <div class="control is-expanded"><!--!--><input class="input is_bg" type="text" placeholder="Nhập số liệu mục tiêu" @bind="kr.target"></div><!--!-->
+                                                <div class="control" style="width: 100px;"><input type="text" class="input is_bg" placeholder="Đơn vị tính" @bind="kr.unit"></div>
+                                            </div>
+                                        </li><!--!-->
+                                        <li class="column is-two-fifths-tablet is-full-mobile">
+                                            <div class="field is-grouped">
+                                                <!--!--><div class="control"><label class="label">Kết quả:</label></div>
+                                                <div class="control is-expanded"><input type="text" class="input is_bg" placeholder="Nhập link kết quả..." @bind="kr.link"></div>
+                                            </div>
+                                        </li><!--!-->
+                                        <!--!-->
+                                        <li class="column is-one-fifth-tablet is-half-mobile"><div class="label pt-2">Liên kết chéo:</div></li>
+                                        <li class="column is-four-fifths-tablet is-full-mobile">
+                                            <ul class="columns is-multiline">
+                                                <li class="column is-half">
+                                                    <!--!--><div class="control has-icons-right has_suggest">
+                                                        <input class="input is_bg show_is_active" type="text" placeholder="Chọn người liên kết chéo..." autocomplete="off"><!--!-->
+                                                        <ul class="suggest"></ul><!--!-->
+                                                        <!--!--><span class="icon is-right"><i class="material-icons-outlined">search</i></span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <li class="column is-full"><hr class="m-0"></li>
+                                    @if (string.IsNullOrEmpty(kr.name) || kr.target < 1 || string.IsNullOrEmpty(kr.unit)) checkKR = false;
+                                    else checkKR = true;
+
+                            }
+
+
+                            </div>
+                        </div><div class="slider-footer">
+                            <div class="field is-grouped is-grouped-right is-grouped-multiline">
+                                <div class="control">
+                                    <a class="button" @onclick="addKeyR">
+                                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">add</i></span>
+                                        <!--!--><span>Thêm</span>
+                                        <!--!--><span class="is-hidden-mobile ml-1">kết quả</span>
+                                    </a>
+                                </div><!--!-->
+                                <div class="control">
+                                    <a class="button is-link" @onclick="@(e=>Create(okr))">
+                                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                                        <span>Tạo</span><!--!-->
+                                        <!--!--><span class="is-hidden-mobile ml-1">OKRs</span>
+                                    </a>
+                                </div><!--!-->
+                                <div class="control">
+                                    <a class="button is-danger" @onclick = "DeleteOKRchuaCreate" >
+                                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">delete</i></span>
+                                        <!--!--><span>Xóa</span>
+                                        <!--!--><span class="is-hidden-mobile ml-1">OKRs</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </section>
+
+        </div>
+    </section>
+</main>
+
+
+@code {
+    [CascadingParameter]
+    public MainLayout layoutMain { get; set; }
+    public bool a = false;
+    okrModel.KeyResult Kr = new();
+    public List<okrModel> listork = new();
+    okrModel okr = null;
+    List<UseModel> listUser = new();
+    bool checkKR;
+    // mở form Add OKR
+    private void showAdd()
+    {
+        a = !a;
+
+    }
+    private void Cancle()
+    {
+        navigation.NavigateTo(navigation.Uri, true);
+
+    }
+    //tạo OKR
+    private void addOKR()
+    {
+        showAdd();
+        if (okr == null)
+        {
+            okr = new okrModel
+                {
+                    type = 1 ,
+            // tạo sẵn 1 list KR khi click Thêm OKR
+                    key_results = new List<okrModel.KeyResult>
+                {
+                     new okrModel.KeyResult
+                    {
+                        id = MongoDb.RandomId(),
+                        cross_links = new() // 
+                    }
+                }
+                };
+        }
+    }
+    //Thêm KR
+    private void addKeyR()
+    {
+        //nếu Okr không rỗng thì tạo 1 KR để thêm vào 
+        if (okr != null)
+        {
+            var item = new okrModel.KeyResult
+                {
+                    id = MongoDb.RandomId(),
+                    cross_links = new() 
+                };
+            // thêm RK và List KR 
+            okr.key_results.Add(item);
+        }
+    }
+    //Xoá KR 
+    private async Task DeleteKey(okrModel.KeyResult item)
+    {
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Bạn có chắc muốn xóa kết quả then chốt: {item.name} ?"))
+            return;
+
+        okr.key_results.Remove(item);
+    }
+    //Tạo OKR
+    private async void Create(okrModel okrne)
+    {
+        //lấy các dữ liệu có sẵn, main 
+        okrne.cycle = layoutMain.cycid; //main truyền cycid tức chu kù
+        okrne.user_create = layoutMain.IdU; //main truyền id của use
+        okrne.date_create = DateTime.Now.Ticks; // khi tạo OKR thì tạo thời gian tạo bằng thời gian hiện tại 
+                                                //các trường hợp nếu rỗng
+        if(okrne.name == null)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Nhập các mục tiêu của bạn!");
+
+        }else if (okrne.key_results.Count == 0)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Chưa có KR");
+
+        }
+        else if(okrne.cycle == null)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Chưa chọn Chu Kỳ");
+        }
+        else if(okrne.type == 0)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Chưa chọn loại OKRs");
+
+        }
+        else if(checkKR == false)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Vui Lòng nhập lại Kết quả then chốt");
+
+        }
+        else
+        {
+            if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Xác nhận tạo OKR mới:  ?"))
+                return;
+            DbOkr.Create(okrne); // tạo OKR
+            JSRuntime.InvokeVoidAsync("tagline", true, "Tạo OKR Thành Công");
+            listork = await DbOkr.GetAll();
+            navigation.NavigateTo(navigation.Uri, true);
+            okr = new(); // tạo mới lại okr
+            a = !a;
+
+        }
+    }
+    private void DeleteOKRchuaCreate()
+    {
+        navigation.NavigateTo(navigation.Uri, true);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        listork = await DbOkr.GetAll();
+        listUser = await DbUse.GetAll();
+        StateHasChanged();
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            DrawLineChart();
+        }
+    }
+    List<string> listdateRaw = new();
+    List<okrModel> listOkrRaw = new();
+    private void DrawLineChart()
+    {
+        foreach (var item in listork)
+        {
+            @if(item.cycle == layoutMain.cycid && item.user_create == layoutMain.IdU && item.cycle == layoutMain.cycid ) 
+            {
+                listdateRaw.Add(new DateTime(item.date_create).ToString("dd/MM/yyyy"));
+                listOkrRaw.Add(item);
+            }
+        }
+        Console.WriteLine(listdateRaw.FirstOrDefault() + " -----------------");
+        var data = new
+        {
+            labels = new[] { listdateRaw.FirstOrDefault(), listdateRaw.LastOrDefault() },
+            datasets = new[]
+            {
+                new
+                {
+                    label = "OKR đã tạo",
+                    data = new[] { 0,listOkrRaw.Count() },
+                    borderColor = "rgba(75, 192, 192, 1)",
+                    fill = false,
+                }
+    }
+        };
+
+        JSRuntime.InvokeVoidAsync("drawLineChart", "lineChartCanvas", data);
+    }
+}
+

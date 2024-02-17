@@ -1,0 +1,351 @@
+﻿@page "/okr/checkin/{OkrID}/add"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+@*@page "/okr/checkin/{OkrID}/{idOKRcheckin}"*@
+
+
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <div class="tabs">
+        <div class="tabs_name">
+            <a class="icon-text px-0 has-text-link has-text-weight-normal is-size-6" href="/okr/checkin">
+                <!--!--><span class="icon">
+                    <span class="material-icons-outlined">
+                        keyboard_backspace
+                    </span>
+                </span>
+                <!--!--><span>
+                    Trở về
+                </span>
+            </a><!--!-->
+            <!--!--><span class="icon-text">
+                <span>
+                    Chi tiết OKRs
+                </span>
+            </span>
+        </div><!--!-->
+        <ul>
+            <li class="is-active"><a class="has-text-weight-normal" href="/okr/checkin/241H847686/info">Check-in 1:1</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/@okrCheckin.id/feedback"><!--!-->Phản hồi</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/overview"><!--!-->Tổng quan</a></li>
+        </ul>
+    </div><section class="main_content">
+        <div class="card">
+            <ul class="columns is-vcentered is-variable is-2 mb-5">
+                <!--!-->
+                <li class="column">
+                    <h1 class="title is-5 has-text-info">
+                        CHECK-IN 1:1
+                    </h1>
+                </li>
+            </ul><!--!-->
+            <table class="table is-fullwidth is-vcentered is-noborder is-responsive mb-0">
+                <!--!-->
+                <thead>
+                    <tr>
+                        <th>Mục tiêu</th>
+                        <th width="200px" align="center">Tiến độ</th>
+                        <th width="100px" align="center">Thay đổi</th>
+                        <th width="120px" align="center">Tự tin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="has-text-weight-semibold has-text-link"> @okr_ne.name </span></td><!--!-->
+                        <td>
+                            <!--!--><label class="td-label">Tiến độ</label>
+                            <div class="td-value">
+                                <div class="progress_has_value">
+                                    <progress class="progress is-small is-dark" value="@CalPercent()" max="@CalPercentTagert()"></progress><!--!-->
+                                    <span> @siuu(CalPercent(),CalPercentTagert()) %</span>
+                                </div>
+                            </div>
+                        </td><!--!-->
+                        <td align="center">
+                            <!--!--><label class="td-label">Thay đổi</label>
+                            <div class="td-value has-text-weight-semibold">
+                                @okrCheckin.progress_prev<!--!-->%
+                            </div>
+                        </td><!--!-->
+                        <td align="center">
+                            <!--!--><label class="td-label">Tự tin</label>
+                            <div class="td-value"><div class="select is-fullwidth"><select @bind="confi" ><option value="0"><!--!-->- Chọn -</option><option value="1">Rất tốt</option><option value="2">Ổn</option><option value="3">Không ổn</option></select></div></div>
+                        </td>
+                    </tr><!--!-->
+                    <!--!-->
+                    <tr><td colspan="4"><hr class="m-0"></td></tr>
+                    <!--!-->
+                    <tr>
+                        <td>Kết quả then chốt</td>
+                        <td align="center">Đạt được</td>
+                        <td></td>
+                        <td align="center">Tự tin</td>
+                    </tr>
+                    @foreach (var item in okrCheckin.key_results)
+                    {   
+                        <tr>
+                            <td><span class="has-text-weight-semibold has-text-link"> @item.name </span></td><!--!-->
+                            <td colspan="2">
+                                <!--!--><label class="td-label">Đạt được</label>
+                                <div class="td-value">
+                                    <div class="field has-addons">
+                                        <div class="control" style="width: 140px"><!--!--><input class="input has-text-right" type="text" placeholder="Đã đạt được" @bind="@item.result"></div><!--!-->
+                                        <div class="control is-expanded"><div class="button is-static has-text-link"> @item.target @item.unit   </div></div>
+                                    </div>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value"><div class="select is-fullwidth"><select @bind="item.confident"><option value="0"><!--!-->- Chọn -</option><option value="1">Rất tốt</option><option value="2">Ổn</option><option value="3">Không ổn</option></select></div></div>
+                            </td>
+                        </tr>
+                        <!--!-->
+                        <tr>
+                            <td colspan="4" class="pl-6 pb-4">
+                                <ul class="columns is-multiline is-variable is-2">
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Tiến độ, kết quả công việc?</div><!--!-->
+                                        <div class="control pt-2"><textarea class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..." @bind="item.question1" ></textarea></div>
+                                    </li>
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Công việc nào đang &amp; sẽ chậm tiến độ?</div><!--!-->
+                                        <div class="control pt-2"><textarea class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..." @bind="item.question2"></textarea></div>
+                                    </li>
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Trở ngại, khó khăn là gì?</div><!--!-->
+                                        <div class="control pt-2"><textarea class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..." @bind="item.question3"></textarea></div>
+                                    </li>
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Cần làm gì để vượt qua trở ngại?</div><!--!-->
+                                        <div class="control pt-2"><textarea class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..." @bind="item.question4"></textarea></div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        if (string.IsNullOrEmpty(item.name) || string.IsNullOrEmpty(item.question1) || string.IsNullOrEmpty(item.question2) || string.IsNullOrEmpty(item.question3) || string.IsNullOrEmpty(item.question4) || item.confident==0 ) checkKey = false; else checkKey = true;
+                    }
+                </tbody>
+            </table><div class="field is-grouped">
+                <!--!--><div class="control">File đính kèm</div>
+                <div class="control"><!--!--><div class="control file_upload" _bl_aa83e7ee-ad26-444a-a1a2-81b3bc44bcc0=""><a class="button is-outlined is-link " onclick="document.getElementById('file_241JBAF8FE').click()" title="Chọn file" style="border-radius: 6px; width: 24px; height: 24px; padding: 0px;"><!--!--><span class="icon"><i class="material-icons-outlined is-size-6">upload</i></span></a><!--!--><input id="file_241JBAF8FE" class="is-hidden" multiple="" accept="*" type="file" _bl_6bb7d27e-7a57-44ae-8974-8556609224ab=""><!--!--><span style="opacity:0;pointer-events:none;position:absolute">Chọn file</span></div></div>
+            </div><!--!-->
+            <!--!--><ul style="" class="columns is-multiline is-vcentered is-variable is-1 is-mobile "></ul><div class="field is-grouped is-grouped-multiline mt-5">
+                <div class="control" style="width: 650px;">
+                    <ul class="columns is-multiline is-vcentered is-mobile is-variable is-1">
+                        <!--!-->
+                        <li class="column is-narrow">
+                            Chọn quản lý check-in
+                        </li>
+                        <li class="column is-one-quarter">
+                            <!--!--><!--!--><div id="dropdown_1c331595" class="dropdown is-up  ">
+                                <div class="dropdown-trigger">
+                                    <a class="icon-text">
+                                        <span class="has-text-link is-block" style="max-width: 200px;">Tất cả phòng ban</span><!--!-->
+                                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!--!-->
+                        <li class="column is-narrow" style="position: relative" >
+                            <!--!-->
+                            <div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                                <input class="input is-rounded is-small" type="text" placeholder="Nhập tên nhân viên..." autocomplete="off" 
+                                @onclick = "()=>SearchUser = true"
+                                @oninput = "(e)=> filterUser(e)"
+                                ><!--!-->
+                                
+                                <!--!--><span class="icon is-left"><i class="material-icons-outlined is-size-6">search</i></span>
+                                <a class="is-hidden"><!--!--><i class="material-icons-outlined">close</i></a><!--!-->
+                                <ul class="suggest"></ul>
+                            </div>
+                            <div class="dropdown @(SearchUser?"is-active" : "" )"  style="position: absolute"  >
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-content">
+                                        @foreach(var iteam in templistUsers)
+                                        {
+                                            <div @onclick="() => ChooseUserCheckin(iteam)" class="dropdown-item"> @iteam.nameUse  </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @if (usercheckin != null)
+                            {
+                            <li class="column is-full">
+                                <div class="buttons">
+                                    <a class="button is-info is-rounded" @onclick="()=> usercheckin = null">
+                                        <span>@usercheckin.nameUse</span>
+                                        <span class="icon"><i class="material-icons-outlined is-size-6">close</i></span>
+                                    </a>
+                                </div>
+                            </li>
+                            }
+                        </li>
+                    </ul>
+                </div><div class="control is-expanded has-text-right">
+                    <!--!--><a class="button is-white has-text-danger" onclick="goBack()"><span>Hủy nhập</span></a>
+                    <a class="button is-link" @onclick="Create">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                        <!--!--><span>Hoàn tất</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+@code {
+    public int confi;
+    [CascadingParameter]
+    public MainLayout layoutmain { get; set; }
+    [Parameter]
+    public string OkrID { get; set; }
+    UseModel usercheckin = new();
+    private bool checkKey;
+
+    okrModel okr_ne = new();
+    public double resultCheckin;
+    private bool SearchUser;
+    private List<UseModel> templistUsers;
+    List<UseModel> listUser = new();
+    List<OkrCheckInModel> listOkrCheckin = new();
+    OkrCheckInModel okrCheckin = new();
+    OkrCheckITimeModel timeCheck = new();
+    private int index = 0;
+    OkrCheckInModel okrcheckinPre = new();
+    protected override async void OnInitialized()
+    {
+        okrCheckin.okr = OkrID;
+
+        templistUsers=listUser = await DbUse.GetAll();
+        okr_ne.id = OkrID;
+        okr_ne = await DbOkr.Get(okr_ne);
+        //okr_ne.key_results = okrCheckin.key_results;
+        Console.WriteLine(okr_ne.name);
+        Console.WriteLine(OkrID);
+        foreach (var modelEdit in okr_ne.key_results)
+        {
+            // gán những thứ của KeyOKR cho KeyOKR_checkin
+            var iteamAdd = new OkrCheckInModel.KeyResult()
+                {
+                    id = modelEdit.id,
+                    name = modelEdit.name,
+                    target = modelEdit.target,
+                    unit = modelEdit.unit
+                };
+            okrCheckin.key_results.Add(iteamAdd);
+        }
+        okrcheckinPre.okr = OkrID;
+        okrcheckinPre = await DbOkrCheckin.GetOkrCheckinEx(okrcheckinPre);
+        if (okrcheckinPre == null)
+        {
+            okrcheckinPre = new()
+            {
+                progress_prev = 0
+            };
+        }
+        else
+        {
+            Console.WriteLine(okrcheckinPre.id+ " Tìm thấy ");
+        }
+    }
+    public async void Create()
+    {
+        //StateHasChanged();
+
+        okrCheckin.confident = confi;
+
+        okrCheckin.progress_prev = siuu(CalPercent(), CalPercentTagert()) - okrcheckinPre.progress_prev;
+
+        if(okrCheckin.user_checkin == null)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "phải có quản lý checkin");
+        }
+        else if (okr_ne.done == true)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "Đã hoàn tất thì không thể checkin nháp nữa !");
+        }
+        else if(okrCheckin.confident == 0)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "phải điền độ tự tin");
+        }
+        else if (checkKey == false)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "phải điền đầy đủ các thông tin bắt buộc");
+
+        }
+        else if (okrCheckin.user_checkin == layoutmain.IdU)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "Bạn không thể tự gửi checkin cho chính mình");
+
+        }
+        else
+        {
+              if (!await JSRuntime.InvokeAsync<bool>("confirm", $" Xác thực tạo checkin nháp ?  ?"))
+            return;
+            okrCheckin.user_create = layoutmain.IdU;
+            okrCheckin.cycle = layoutmain.cycid;
+            okrCheckin.date_create = DateTime.Now.Ticks;
+            okrCheckin.draft = false;
+            okrCheckin.checkin = false;
+            //okrCheckin.date_create_okr = okr_ne.date_create;
+            Console.WriteLine("click");
+            okr_ne.confident = okrCheckin.confident;
+            //okr_ne.key_results
+            okr_ne.date_checkin = DateTime.Now.Ticks;
+            await DbOkr.Set_statusCheckin(okr_ne, 1);
+            await DbOkrCheckin.Create(okrCheckin);
+            timeCheck.date_checkin = okrCheckin.date_create;
+            timeCheck.okr = okr_ne.id;
+            timeCheck.status = 1;
+            DbOkrCheckinTime.Create(timeCheck);
+            navigation.NavigateTo("/okr/checkin/");
+            await JSRuntime.InvokeVoidAsync("tagline", true, "Tạo Checkin Nháp Thành công");
+
+        }
+    }
+    public void filterUser(ChangeEventArgs e)
+    {
+        foreach (var item in listUser)
+        {
+            item.nameUse = item.nameUse;
+        }
+        templistUsers = listUser.Where(x => x.nameUse.Contains(e.Value.ToString())).ToList();
+    }
+    public void ChooseUserCheckin(UseModel model)
+    {
+        usercheckin = model;
+        okrCheckin.user_checkin = model.id;
+        SearchUser = false;
+    }
+    private double CalPercent()
+    {
+        double result = 0;
+
+        foreach (var key in okrCheckin.key_results)
+        {
+
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert()
+    {
+        double target = 0;
+
+        foreach (var key in okrCheckin.key_results)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    private double siuu(double a, double b)
+    {
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+
+}

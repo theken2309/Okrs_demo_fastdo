@@ -1,0 +1,361 @@
+﻿@page "/okr/checkin"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+    <section class="main_content">
+        <div class="card flex_column is_fullheight">
+            <ul class="columns is-vcentered is-variable is-2 mb-2">
+                <!--!-->
+                <li class="column">
+                    <h1 class="title is-5 has-text-info">
+                        CHECK-IN OKRs
+                    </h1>
+                </li>
+                <li class="column is-narrow">
+                    <!--!--><!--!--><div id="dropdown_58815283" class="dropdown is-left  ">
+                        <div class="dropdown-trigger">
+                            <a class="icon-text">
+                                <span class="has-text-link is-block" style="max-width: 200px;">Tất cả phòng ban</span><!--!-->
+                                <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                            </a>
+                        </div>
+                    </div>
+                </li><!--!-->
+                <li class="column is-one-quarter">
+                    <!--!--><div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                        @*<input @bind="@mainlayOut.userNameLogin" class="input is-rounded is-small" type="text" placeholder="@mainlayOut.userNameLogin" autocomplete="off"><!--!-->*@
+                        <select @bind="@userSearch" class="select is-primary">
+                            @foreach (var user in listuser)
+                            {
+                                <option @key="@user.id" value="@user.id"> @user.nameUse </option>
+                            }
+                        </select>
+
+                        <ul class="suggest"></ul>
+                    </div>
+                </li><!--!-->
+                <li class="column is-narrow"><a href="/okr/history/241152A564"><!--!-->Lịch sử chỉnh sửa</a></li>
+            </ul><!--!-->
+
+            <div class="inner_section scrolly" style="flex:1">
+                <table class="table is-fullwidth is-noborder is-responsive sticky only_desktop" style="width:100%">
+                    <!--!-->
+                    <thead>
+                        <tr class="is-size-7" style="border-bottom: 1px solid #DEDEDE;">
+                            <th class="">Mục tiêu</th>
+                            <th class="" width="160px">Kết Quả Then Chốt</th>
+                            <th class="" width="200px" align="center">Tiến độ</th>
+                            <th class="" width="90px" align="center">Thay đổi</th>
+                            <th class="" width="90px" align="center">Tự tin</th>
+                            <th class="" width="105px" align="center" title="Check-in gần nhất">Check-in</th>
+                            <th class="" width="120px" align="center">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var okr in data)
+                        {
+                            @if (okr.Key.user_create == userSearch)
+                            {
+                                @if (mainlayOut.cycid == okr.Key.cycle)
+                                {
+
+                                    double per = okr.Value == null ? 0 : CalPercent(okr.Value.key_results);
+                                    double tar = okr.Value == null ? 0 : CalPercentTagert(okr.Value.key_results);
+
+                                    <tr>
+                                        <td>
+                                            <div class="is-flex">
+                                                <a class="has-text-weight-semibold" href="/okr/checkin/@okr.Key.id/info/@idOkr_checkin">
+                                                    @okr.Key.name @if (okr.Key.done == true)
+                                                    {
+                                                        <span class="ml-1 icon" title="OKRs đã hoàn thành"><i class="material-icons-outlined is-size-6 has-text-success">check_circle</i></span>
+                                                    }
+
+                                                </a>
+                                            </div>
+                                        </td><!--!-->
+                                        <td>
+                                            <!--!--><label class="td-label">Kết quả</label>
+                                            <div class="td-value">
+                                                <a class="icon-text has-text-weight-semibold has-text-info" @onclick="()=>ToggleOKR(okr.Key.id)">
+                                                    <span> @okr.Key.key_results.Count <!--!--> kết quả</span><!--!-->
+                                                    <span class="icon"><i class="material-icons-outlined is-size-5">arrow_right</i></span>
+                                                </a>
+                                            </div>
+                                        </td><!--!-->
+                                        <td>
+                                            <!--!--><label class="td-label">Tiến độ</label>
+                                            <div class="td-value">
+                                                <div class="progress_has_value">
+                                                    <progress class="progress is-small is-dark" value="@per" max="@tar"></progress><!--!-->
+                                                    <span> @siuu(per,tar) %  </span>
+                                                </div>
+                                            </div>
+                                        </td><!--!-->
+                                        <td align="center">
+                                            <!--!--><label class="td-label">Thay đổi</label>
+                                            <div class="td-value has-text-weight-semibold">
+                                                @if (okr.Value != null)
+                                                {
+                                                    @((decimal)okr.Value.progress_prev)
+
+                                                }
+                                                else
+                                                    @((decimal)okr.Key.progress_prev)
+
+                                                <!--!-->%
+                                            </div>
+                                        </td><!--!-->
+                                        <td align="center">
+                                            <!--!--><label class="td-label">Tự tin</label>
+                                            <div class="td-value has-text-weight-semibold">
+                                                @if (okr.Key.status_checkin != 0)
+                                                {
+                                                    @if (okr.Value.confident == 0)
+                                                    {
+
+                                                    }
+                                                    else if (okr.Value.confident == 1)
+                                                    {
+                                                        <span>
+                                                            <span class="has-text-success">Rất tốt</span>
+                                                        </span>
+                                                    }
+                                                    else if (okr.Value.confident == 2)
+                                                    {
+                                                        <span>
+                                                            <span class="has-text-warning">Ổn</span>
+                                                        </span>
+                                                    }
+                                                    else if (okr.Value.confident == 3)
+                                                    {
+                                                        <span>
+                                                            <span class="has-text-danger">Không ổn</span>
+                                                        </span>
+                                                    }
+                                                }
+
+                                            </div>
+                                        </td><!--!-->
+                                        <td align="center">
+                                            <!--!--><label class="td-label">Check-in</label>
+                                            @if (okr.Key.status_checkin != 0)
+                                            {
+                                                <div class="td-value">    @(new DateTime(okr.Key.date_checkin).ToString("dd/MM/yyyy")) </div>
+                                            }
+                                        </td><!--!-->
+                                        <td align="center">
+                                            <!--!--><label class="td-label">Trạng thái</label>
+                                            <div class="td-value has-text-weight-semibold">
+                                                @if (okr.Key.status_checkin != 0)
+                                                {
+                                                    @if (okr.Key.status_checkin == 0)
+                                                    {
+
+                                                    }
+                                                    else if (okr.Key.status_checkin == 1)
+                                                    {
+                                                        <div class="td-value has-text-weight-semibold"><!--!--><span class="has-text-success">Check-in nháp</span></div>
+                                                    }
+                                                    else if (okr.Key.status_checkin == 2)
+                                                    {
+                                                        <div class="td-value has-text-weight-semibold"><!--!--><span class="has-text-info">Đã xác nhận</span></div>
+                                                    }
+                                                    else if (@okr.Key.status_checkin == 3)
+                                                    {
+                                                        <div class="td-value has-text-weight-semibold"><!--!--><span class="has-text-link">Đã check-in</span></div>
+                                                    }
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    //nếu như id của okr.Key không có trong list của hidden thì hiện nó lên
+
+                                    @if (!hiddenList.Contains(okr.Key.id))
+                                    {
+                                        @if (okr.Value == null)
+                                        {
+                                            @foreach (var keyR in okr.Key.key_results)
+                                            {
+                                                <tr>
+                                                    <td class="pl-4">@keyR.name</td><!--!-->
+                                                    <td class="pl-2"></td><!--!-->
+                                                    <td>
+                                                        <!--!--><label class="td-label">Đạt được</label>
+                                                        <div class="td-value">
+                                                            <span class="has-text-success" title="00/100">@keyR.result/@keyR.target</span><!--!-->
+                                                            <span class="is-pulled-right"> @siuu(keyR.result,keyR.target)%</span>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Thay đổi</label>
+                                                        <div class="td-value">
+                                                            @*@keyR.change <!--!-->%*@
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Tự tin</label>
+                                                        @if (keyR.confident == 0)
+                                                        {
+
+                                                        }
+                                                        else if (keyR.confident == 1)
+                                                        {
+                                                            <span>
+                                                                <span class="has-text-success">Rất tốt</span>
+                                                            </span>
+                                                        }
+                                                        else if (keyR.confident == 2)
+                                                        {
+                                                            <span>
+                                                                <span class="has-text-warning">Ổn</span>
+                                                            </span>
+                                                        }
+                                                        else if (keyR.confident == 3)
+                                                        {
+                                                            <span>
+                                                                <span class="has-text-danger">Không ổn</span>
+                                                            </span>
+                                                        }
+                                                    </td><!--!-->
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                            }
+
+                                        }
+                                        else if (okr.Value != null)
+                                        {
+                                            @foreach (var keyR in okr.Value.key_results)
+                                            {
+                                                <tr>
+                                                    <td class="pl-4">@keyR.name</td><!--!-->
+                                                    <td class="pl-2"></td><!--!-->
+                                                    <td>
+                                                        <!--!--><label class="td-label">Đạt được</label>
+                                                        <div class="td-value">
+                                                            <span class="has-text-success" title="00/100">@keyR.result/@keyR.target</span><!--!-->
+                                                            <span class="is-pulled-right"> @siuu(keyR.result,keyR.target) %</span>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Thay đổi</label>
+                                                        <div class="td-value">
+                                                            @*@okr.Value.progress_prev <!--!-->%*@
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Tự tin</label>
+                                                        @if (keyR.confident == 0)
+                                                        {
+
+                                                        }
+                                                        else if (keyR.confident == 1)
+                                                        {
+                                                            <span>
+                                                                <span class="has-text-success">Rất tốt</span>
+                                                            </span>
+                                                        }
+                                                        else if (keyR.confident == 2)
+                                                        {
+                                                            <span>
+                                                                <span class="has-text-warning">Ổn</span>
+                                                            </span>
+                                                        }
+                                                        else if (keyR.confident == 3)
+                                                        {
+                                                            <span>
+                                                                <span class="has-text-danger">Không ổn</span>
+                                                            </span>
+                                                        }
+                                                    </td><!--!-->
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</section>
+@code {
+    [CascadingParameter]
+    public MainLayout mainlayOut { get; set; }
+
+    List<okrModel> list_okr = new();
+    //tạo ra 1 list chứa các okr không xem thêm
+    private List<string> hiddenList = new();
+    private okrModel okr_ne = new();
+    private string idOkr_checkin;
+    //private Dictionary<okrModel, List<OkrCheckInModel>> data = new();
+    private Dictionary<okrModel, OkrCheckInModel> data = new();
+    public string userSearch;
+    private List<UseModel> listuser;
+    protected override async Task OnInitializedAsync()
+    {
+        userSearch = mainlayOut.IdU;
+        await FormatData();
+        //list_okr = await DbOkr.GetByUserID(mainlayOut.IdU);
+        hiddenList = list_okr.Select(x => x.id).ToList();
+        //hiddenList = listOkr.Select(x => x.id).ToList();
+    }
+    private async Task FormatData()
+    {
+       
+        //list_okr = await DbOkr.GetByUserID(mainlayOut.IdU);
+        list_okr = await DbOkr.GetAll();
+        listuser = await DbUse.GetAll();
+        foreach (var orkcc in list_okr)
+        {
+            //List<OkrCheckInModel> okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            //OkrCheckInModel> okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            OkrCheckInModel okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            data.Add(orkcc, okrCheckin);
+        }
+    }
+    //xử lý khi click vào xem OKR nào thì hiện KR của OKR đó
+    private void ToggleOKR(string id)
+    {
+        if (!hiddenList.Contains(id))
+            hiddenList.Add(id);
+        else
+            hiddenList.RemoveAll(x => x == id);
+    }
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    private double CalPercent(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double target = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    }

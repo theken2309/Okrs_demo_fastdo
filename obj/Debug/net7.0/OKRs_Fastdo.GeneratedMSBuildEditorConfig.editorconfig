@@ -1,0 +1,169 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = OKRs_Fastdo
+build_property.RootNamespace = OKRs_Fastdo
+build_property.ProjectDir = E:\Intern_Fastdo\OKRs_Fastdo\OKRs_Fastdo\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\Intern_Fastdo\OKRs_Fastdo\OKRs_Fastdo
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/HomeComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okroverview/OkrOverviewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyb3ZlcnZpZXdcT2tyT3ZlcnZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okrs/CheckinOkrComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyc1xDaGVja2luT2tyQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okrs/OkrCheckinComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyc1xPa3JDaGVja2luQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okrs/_EditOKRcheckinComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyc1xfRWRpdE9LUmNoZWNraW5Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okrs/_OkrCheckinComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyc1xfT2tyQ2hlY2tpbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okrs/_OkrCheckinEditComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyc1xfT2tyQ2hlY2tpbkVkaXRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okrs/_OkrEditCheckinNhap.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyc1xfT2tyRWRpdENoZWNraW5OaGFwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr/OkrComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyXE9rckNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr/_OkrComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyXF9Pa3JDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/okr_config/FeedbackComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcb2tyX2NvbmZpZ1xGZWVkYmFja0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/okr_config/OkrAdminComponnent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcb2tyX2NvbmZpZ1xPa3JBZG1pbkNvbXBvbm5lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/okr_config/SuggestComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcb2tyX2NvbmZpZ1xTdWdnZXN0Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Fb/FBackneComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX0ZiXEZCYWNrbmVDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Fb/FbackOkrComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX0ZiXEZiYWNrT2tyQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Fb/FbNoCheckinComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX0ZiXEZiTm9DaGVja2luQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Fb/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX0ZiXFRlc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/DGReviewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xER1Jldmlld0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/OkrReviewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xPa3JSZXZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/_DGReviewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xfREdSZXZpZXdDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/_OkrReviewComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xfT2tyUmV2aWV3Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/_ViewTeamComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xfVmlld1RlYW1Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/__OkrReviewAddComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xfX09rclJldmlld0FkZENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/__OkrReviewDComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xfX09rclJldmlld0RDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Okr_Review/__OkrReviewEditComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT2tyX1Jldmlld1xfX09rclJldmlld0VkaXRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Sidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lkZWJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/HeaderMain.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEhlYWRlck1haW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/LayoutLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExheW91dExvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZ2lzdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-r89pg2jpp8
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ktln35gfyo
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Intern_Fastdo/OKRs_Fastdo/OKRs_Fastdo/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

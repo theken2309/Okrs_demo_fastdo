@@ -1,0 +1,236 @@
+﻿@page "/okr/suggest"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <section class="main_content ">
+        <div class="card flex_column is_fullheight">
+            <ul class="columns is-vcentered is-variable is-2 is-mobile is-multiline mb-2">
+                <!--!-->
+                <li class="column is-full-mobile">
+                    <h1 class="title is-5 is-size-6-mobile has-text-info">
+                        OKRs - GÓP Ý MỤC TIÊU
+                    </h1>
+                </li>
+                <li class="column is-one-fifth is-full-mobile">
+                    <div class="select is-fullwidth">
+                        <select>
+                            <option>  Chọn Lý Do </option>
+                            @foreach (var sug in okr_ne.suggests)
+                            {
+                                <option value="@sug.id"> @sug.name </option>
+                            }
+                        </select>
+                    </div>
+                </li><!--!-->
+                <li class="column is-one-fifth is-full-mobile">
+                    <div class="select is-fullwidth">
+                        <select class="is-family-code" @onchange = "HandleChange" >
+                            <option value="false"><!--!-->GÓP Ý CỦA TÔI</option>
+                            <option value="true"><!--!-->GÓP Ý CỦA MỌI NGƯỜI</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="column is-narrow" @onclick="addNe">
+                    <a class="button is-link">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">add</i></span>
+                        <!--!--><span>Thêm mới</span>
+                    </a>
+                </li>
+            </ul><!--!-->
+            <div class="inner_section scrolly" style="flex:1">
+                <table class="table is-striped is-noborder is-fullwidth is-responsive">
+                    <!--!-->
+                    <thead>
+                        <tr class="is-size-7" style="border-bottom: 1px solid #DEDEDE;">
+                            <th class="pt-0">Nội dung góp ý</th>
+                            <th class="pt-0" width="15%">Gửi đến</th>
+                            <th class="pt-0" width="20%">Lý do bạn muốn góp ý</th>
+                            <th class="pt-0" width="160px">Ngày gửi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (checkALl == true) //xem all moi nguoi
+                        {
+                            @foreach (var suggg in listSuggest)
+                            {
+                                if (suggg.cycle == mainLayout.cycid)
+                                {
+                                    <tr>
+                                        <td><div class="is-word-break"><!--!--> @suggg.name  </div></td><!--!-->
+                                        <td>
+                                            <!--!--><label class="td-label">Gửi đến</label>
+                                            <div class="td-value">FASTDO ĐÀ NẴNG</div>
+                                        </td><!--!-->
+                                        <td>
+                                            <!--!--><label class="td-label">Lý do</label>
+                                            <div class="td-value"> @suggg.type </div>
+                                        </td><!--!-->
+                                        <td>
+                                            <!--!--><label class="td-label">Ngày gửi</label>
+                                            <div class="td-value"> "@(new DateTime(suggg.date).ToString("dd/MM/yyyy"))"  </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        else // xem moi bản thân
+                        {
+
+                            @foreach (var suggg in listSuggest)
+                            {
+                                if (suggg.user == mainLayout.IdU)
+                                {
+                                    if (suggg.cycle == mainLayout.cycid)
+                                    {
+
+                                        <tr>
+                                            <td><div class="is-word-break"><!--!--> @suggg.name  </div></td><!--!-->
+                                            <td>
+                                                <!--!--><label class="td-label">Gửi đến</label>
+                                                <div class="td-value">FASTDO ĐÀ NẴNG</div>
+                                            </td><!--!-->
+                                            <td>
+                                                <!--!--><label class="td-label">Lý do</label>
+                                                <div class="td-value"> @suggg.type </div>
+                                            </td><!--!-->
+                                            <td>
+                                                <!--!--><label class="td-label">Ngày gửi</label>
+                                                <div class="td-value"> "@(new DateTime(suggg.date).ToString("dd/MM/yyyy"))"  </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</section>
+@if (add)
+{
+    <div class="slider is-large is-active" style="">
+        <div class="slider-header">
+            <div class="columns is-variable is-2 is-mobile is-vcentered">
+                <!--!--><div class="column">
+                    <div class="has-text-weight-bold is-size-5">
+                        Tạo góp ý mục tiêu
+                    </div>
+                </div>
+                <div class="column is-narrow"><!--!--><button class="button" @onclick="addNe"><span class="icon"><span class="material-icons-outlined">close</span></span><span>Hủy tạo</span></button></div>
+            </div>
+        </div><!--!-->
+        <div class="slider-body">
+            <div class="scrolly is-mobile is-flex is-flex-direction-column">
+                <div class="field">
+                    <div class="columns is-variable is-multiline is-2">
+                        <div class="column is-full">
+                            <div class="field">
+                                <!--!--><label class="label">Gửi đến *</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth is_bg">
+                                        <select class="is-family-code">
+                                            <option> </option>
+                                            <option> </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div><!--!-->
+                            <div class="field">
+                                <!--!--><label class="label">Lý do bạn muốn góp ý *</label>
+                                <div class="control">
+                                    <div class="select is-fullwidth is_bg">
+                                        <select @bind="okr_suggest.type">
+                                            <option> Chọn lý do</option>
+                                            @foreach (var sug in okr_ne.suggests)
+                                            {
+                                                <option value="@sug.name"> @sug.name  </option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--!-->
+                        <div class="column is-full">
+                            <div class="field">
+                                <label class="label">
+                                    <!--!--><span>Nội dung mục góp ý *</span>
+                                    <a class="icon is-pulled-right has-text-info"><!--!--><i class="material-icons-outlined">close</i></a>
+                                </label><!--!-->
+                                <div class="control"><textarea @bind="okr_suggest.name" class="textarea is_bg" placeholder="Bạn muốn công ty dành nguồn lực tập trung vào mục tiêu / điều gì trong quý tới... "></textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><div class="slider-footer">
+            <div class="field is-grouped is-grouped-right">
+                <div class="control"><!--!--><button class="button is-link is-inverted"><span class="icon"><span class="material-icons-outlined">add</span></span><span>Thêm</span></button></div><!--!-->
+                <div class="control"><!--!--><button class="button is-link" @onclick="Create"><span class="icon"><span class="material-icons-outlined">done</span></span><span>Gửi góp ý</span></button></div>
+            </div>
+        </div>
+    </div>
+}
+@code {
+    [CascadingParameter]
+    public MainLayout mainLayout { get; set; }
+    public okrConfigModel okr_ne = new()
+        {
+            id = "241I20974A"
+        };
+    private bool checkALl = false;
+    private Okr_suggestModel okr_suggest = new();
+    private List<Okr_suggestModel> listSuggest = new();
+    protected override async Task OnInitializedAsync()
+    {
+        okr_ne = await DbOkrConfig.Get(okr_ne);
+        listSuggest = await DbOkr_suggest.GetAll();
+        Console.WriteLine(okr_ne.id);
+    }
+    private bool add = false;
+    private void HandleChange(ChangeEventArgs e)
+    {
+        // Lấy giá trị từ sự kiện onchange
+        if (bool.TryParse(e.Value?.ToString(), out checkALl))
+        {
+            // Sử dụng giá trị đã lấy
+            Console.WriteLine($"Giá trị đã chọn: {checkALl}");
+        }
+        else
+        {
+            // Xử lý trường hợp giá trị không hợp lệ
+            Console.WriteLine("Giá trị không hợp lệ");
+        }
+    }
+    private void addNe()
+    {
+        add = !add;
+    }
+    private async void Create()
+    {
+        okr_suggest.cycle = mainLayout.cycid;
+        okr_suggest.user = mainLayout.IdU;
+        okr_suggest.date = DateTime.Now.Ticks;
+        if (okr_suggest.cycle == null)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "Chưa Chọn Chu Kỳ!");
+        }
+        if(okr_suggest.name == null || okr_suggest.type == null)
+        {
+            await JSRuntime.InvokeVoidAsync("tagline", false, "Chưa điền lý do mà thông tin góp ý!");
+
+        }
+        else
+        {
+            DbOkr_suggest.Create(okr_suggest);
+            okr_suggest = new();
+            navigation.NavigateTo(navigation.Uri, true);
+            await JSRuntime.InvokeVoidAsync("tagline", true, "Tạo Góp Ý Thành công!");
+
+        }
+    }
+}

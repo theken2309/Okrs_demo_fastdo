@@ -1,0 +1,608 @@
+﻿@page "/okr/review/viewTeam"
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <div class="tabs">
+        <!--!--><div class="tabs_name">
+            Đánh giá OKRs
+        </div>
+        <ul>
+            <li class=""><!--!--><a href="/okr/review" class="has-text-weight-normal">Cá nhân</a></li><!--!-->
+            <li class="is-active"><!--!--><a class="has-text-weight-normal">Đội nhóm</a></li>
+        </ul>
+    </div><!--!-->
+
+    <section class="main_content">
+        <div class="">
+            <ul class="columns is-vcentered is-variable is-2 mb-2">
+                <li class="column is-narrow">
+                    <!--!--><div class="dropdown is-right ">
+                        <div class="dropdown-trigger">
+                            <a class="icon-text">
+                                <span class="has-text-link">Tất cả trạng thái</span><!--!-->
+                                <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                            </a>
+                        </div>
+                    </div>
+                </li><!--!-->
+                <li class="column is-narrow dropdown">
+                    <div class="select is-fullwidth">
+                        <select @bind="checkSee">
+                            <option value="0">Xem của mọi người</option>
+                            <option value="1">Xem những OKR mình cần phải đánh giá</option>
+                        </select>
+                    </div>
+
+                </li>
+
+                <li class="column is-one-quarter">
+                    <!--!--><div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                        <input class="input is-rounded is-small" type="text" placeholder="Nhập tên nhân viên..." autocomplete="off"><!--!-->
+                        <!--!--><span class="icon is-left"><i class="material-icons-outlined is-size-6">search</i></span>
+                        <a class="is-hidden"><!--!--><i class="material-icons-outlined">close</i></a><!--!-->
+                        <ul class="suggest"></ul>
+                    </div>
+                </li>
+            </ul><!--!-->
+
+            <div class="inner_section">
+                <table class="table is-fullwidth is-vcentered is-noborder is-responsive">
+                    <!--!-->
+                    <thead>
+                        <tr class="is-size-7" style="border-bottom: 1px solid #DEDEDE;">
+                            <th class="pt-0">Mục tiêu</th>
+                            <th class="pt-0" width="60px"></th>
+                            <th class="pt-0" width="130px" align="center">Tiến độ</th>
+                            <th class="pt-0" width="120px" align="center">Điểm hệ thống</th>
+                            <th class="pt-0" width="120px" align="center">Tự đánh giá</th>
+                            <th class="pt-0" width="120px" align="center">QL đánh giá</th>
+                            <th class="pt-0" width="110px" align="center">Nhân viên</th>
+                            <th class="pt-0" width="110px" align="center">Quản lý</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in listUse)
+                        { // show từng người user
+                            @if (user.id != layoutmain.IdU)
+                            { // không show okr đánh giá của bản thân
+                                <tr>
+                                    <td colspan="8">
+                                        <div class="user_item">
+                                            <img class="image is-36x36 mr-2" src="https://storage.googleapis.com/fastdo-storage.appspot.com/avatar/638397892712111783_305765668_3349443641956452_8173267747623672115_n.jpg" alt="IMG"><!--!-->
+                                            <div>
+                                                <p class="has-text-weight-semibold has-text-info is-size-6"> @user.nameUse </p><!--!-->
+                                                <p class="text_1_line has-text-grey is-size-7" style="max-width: 400px;">FASTDO ĐÀ NẴNG / PHÒNG SẢN XUẤT</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!--!-->
+                                @foreach (var okr in data)
+                                {
+                                    @if (okr.Key.user_create == user.id)
+                                    {
+                                        @if (checkSee == 0)
+                                        { //xem mọi người
+                                            @if (okr.Key.cycle == layoutmain.cycid && okr.Key.user_create != layoutmain.IdU)
+                                            {
+
+                                                double result;
+                                                double pointman;
+                                                if (okr.Value.id == null) pointman = CalManKey(okr.Key.key_results);
+                                                else pointman = CalMan(okr.Value.key_results);
+                                                if (okr.Value.id == null)
+                                                {
+                                                    result = siuu(CalPercentKey(okr.Key.key_results), CalPercentTagertKey(okr.Key.key_results));
+                                                }
+                                                else
+                                                {
+                                                    result = siuu(CalPercent(okr.Value.key_results), CalPercentTagert(okr.Value.key_results));
+                                                }
+                                                double staff_point = 0;
+                                                staff_point = okr.Value.id == null ? CalYouKey(okr.Key.key_results) : CalYou(okr.Value.key_results);
+                                                double per = okr.Value == null ? 0 : CalPercent(okr.Value.key_results);
+                                                double tar = okr.Value == null ? 0 : CalPercentTagert(okr.Value.key_results);
+                                                <tr>
+                                                    <td><div class="is-flex"><a class="has-text-weight-semibold has-text-link" href="/okr/review/@okr.Key.id/@okr.Value.id"> @okr.Key.name </a></div></td><!--!-->
+                                                    <td align="right">
+                                                        <span class="icon-text">
+                                                            <a class="icon"
+                                       @onclick="() => ToggleOKR(okr.Key.id)"><i class="material-icons-outlined is-size-5">arrow_right</i></a>
+                                                        </span>
+                                                    </td><!--!-->
+                                                    <td>
+                                                        <!--!--><label class="td-label">Tiến độ</label>
+                                                        <div class="td-value">
+                                                            <div class="progress_has_value">
+                                                                <progress class="progress is-small is-dark" value="@siuu(per,tar)" max="100"></progress><!--!-->
+                                                                <span> @siuu(per,tar) %</span>
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Điểm hệ thống</label>
+                                                        <div class="td-value">
+                                                            <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                @siuu(per,tar)    <!--!-->%
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Tự đánh giá</label>
+                                                        <div class="td-value">
+                                                            <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                @((decimal)staff_point) <!--!-->%
+
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">QL đánh giá</label>
+                                                        <div class="td-value">
+                                                            <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                @pointman    <!--!-->%
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Nhân viên</label>
+
+                                                        <div class="td-value">
+                                                            <span class="has-text-grey">
+                                                                @if (okr.Key.review_send_date != 0)
+                                                                    @(new DateTime(okr.Key.review_send_date).ToString("HH:mm dd/MM/yyyy"))
+
+
+
+
+                                                            </span>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Quản lý</label>
+                                                        <div class="td-value">
+                                                            <span class="has-text-grey">
+                                                                @if (okr.Key.review_manager_date != 0)
+                                                                    @(new DateTime(okr.Key.review_manager_date).ToString("HH:mm dd/MM/yyyy"))
+
+
+
+
+
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!--!-->
+                                                @if (hiddenList.Contains(okr.Key.id))
+                                                {
+                                                    @if (okr.Value.id == null)
+                                                    {
+                                                        @foreach (var KeyR in okr.Key.key_results)
+                                                        {
+
+                                                            <tr>
+                                                                <td class="pl-4"> @KeyR.name</td><!--!-->
+                                                                <td class="td-hide"></td>
+                                                                <td>
+                                                                    <!--!--><label class="td-label">Tiến độ</label>
+                                                                    <div class="td-value">
+                                                                        <span class="has-text-success" title="  / 100.000">  @KeyR.result/@KeyR.target</span><!--!-->
+                                                                        <span class="is-pulled-right">%</span>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Điểm hệ thống</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            @siuu(KeyR.result,KeyR.target)  <!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Tự đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            50<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">QL đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            0<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center"></td>
+                                                                <td align="center"></td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        @foreach (var KeyR in okr.Value.key_results)
+                                                        {
+
+                                                            <tr>
+                                                                <td class="pl-4"> @KeyR.name</td><!--!-->
+                                                                <td class="td-hide"></td>
+                                                                <td>
+                                                                    <!--!--><label class="td-label">Tiến độ</label>
+                                                                    <div class="td-value">
+                                                                        <span class="has-text-success" title="  / 100.000">  @KeyR.result/@KeyR.target</span><!--!-->
+                                                                        <span class="is-pulled-right">%</span>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Điểm hệ thống</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            @siuu(KeyR.result,KeyR.target)  <!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Tự đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            50<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">QL đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            0<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center"></td>
+                                                                <td align="center"></td>
+                                                            </tr>
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        { //xem những người mình phải đánh giá
+                                            @if (okr.Key.cycle == layoutmain.cycid && okr.Key.parent == layoutmain.IdU && okr.Key.user_create != layoutmain.IdU)
+                                            {
+
+                                                double result;
+                                                double pointman;
+                                                if (okr.Value.id == null) pointman = CalManKey(okr.Key.key_results);
+                                                else pointman = CalMan(okr.Value.key_results);
+                                                if (okr.Value.id == null)
+                                                {
+                                                    result = siuu(CalPercentKey(okr.Key.key_results), CalPercentTagertKey(okr.Key.key_results));
+                                                }
+                                                else
+                                                {
+                                                    result = siuu(CalPercent(okr.Value.key_results), CalPercentTagert(okr.Value.key_results));
+                                                }
+                                                double staff_point = 0;
+                                                staff_point = okr.Value.id == null ? CalYouKey(okr.Key.key_results) : CalYou(okr.Value.key_results);
+                                                double per = okr.Value == null ? 0 : CalPercent(okr.Value.key_results);
+                                                double tar = okr.Value == null ? 0 : CalPercentTagert(okr.Value.key_results);
+                                                <tr>
+                                                    <td><div class="is-flex"><a class="has-text-weight-semibold has-text-link" href="/okr/review/@okr.Key.id/@okr.Value.id"> @okr.Key.name </a></div></td><!--!-->
+                                                    <td align="right">
+                                                        <span class="icon-text">
+                                                            <a class="icon"
+                                                                  @onclick="() => ToggleOKR(okr.Key.id)"><i class="material-icons-outlined is-size-5">arrow_right</i></a>
+                                                        </span>
+                                                    </td><!--!-->
+                                                    <td>
+                                                        <!--!--><label class="td-label">Tiến độ</label>
+                                                        <div class="td-value">
+                                                            <div class="progress_has_value">
+                                                                <progress class="progress is-small is-dark" value="@siuu(per,tar)" max="100"></progress><!--!-->
+                                                                <span> @siuu(per,tar) %</span>
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Điểm hệ thống</label>
+                                                        <div class="td-value">
+                                                            <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                @siuu(per,tar)    <!--!-->%
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Tự đánh giá</label>
+                                                        <div class="td-value">
+                                                            <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                @((decimal)staff_point) <!--!-->%
+
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">QL đánh giá</label>
+                                                        <div class="td-value">
+                                                            <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                @pointman    <!--!-->%
+                                                            </div>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Nhân viên</label>
+
+                                                        <div class="td-value">
+                                                            <span class="has-text-grey">
+                                                                @if (okr.Key.review_send_date != 0)
+                                                                    @(new DateTime(okr.Key.review_send_date).ToString("HH:mm dd/MM/yyyy"))
+                                                            </span>
+                                                        </div>
+                                                    </td><!--!-->
+                                                    <td align="center">
+                                                        <!--!--><label class="td-label">Quản lý</label>
+                                                        <div class="td-value">
+                                                            <span class="has-text-grey">
+                                                                @if (okr.Key.review_manager_date != 0)
+                                                                    @(new DateTime(okr.Key.review_manager_date).ToString("HH:mm dd/MM/yyyy"))
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!--!-->
+                                                // toggle hiện KR của O
+                                                @if (hiddenList.Contains(okr.Key.id))
+                                                {
+                                                    @if (okr.Value.id == null)
+                                                    {
+                                                        @foreach (var KeyR in okr.Key.key_results)
+                                                        {
+                                                            <tr>
+                                                                <td class="pl-4"> @KeyR.name</td><!--!-->
+                                                                <td class="td-hide"></td>
+                                                                <td>
+                                                                    <!--!--><label class="td-label">Tiến độ</label>
+                                                                    <div class="td-value">
+                                                                        <span class="has-text-success" title="  / 100.000">  @KeyR.result/@KeyR.target</span><!--!-->
+                                                                        <span class="is-pulled-right">%</span>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Điểm hệ thống</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            @siuu(KeyR.result,KeyR.target)  <!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Tự đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            50<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">QL đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            0<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center"></td>
+                                                                <td align="center"></td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        @foreach (var KeyR in okr.Value.key_results)
+                                                        {
+                                                            <tr>
+                                                                <td class="pl-4"> @KeyR.name</td><!--!-->
+                                                                <td class="td-hide"></td>
+                                                                <td>
+                                                                    <!--!--><label class="td-label">Tiến độ</label>
+                                                                    <div class="td-value">
+                                                                        <span class="has-text-success" title="  / 100.000">  @KeyR.result/@KeyR.target</span><!--!-->
+                                                                        <span class="is-pulled-right">%</span>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Điểm hệ thống</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            @siuu(KeyR.result,KeyR.target)  <!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">Tự đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            50<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center">
+                                                                    <!--!--><label class="td-label">QL đánh giá</label>
+                                                                    <div class="td-value">
+                                                                        <div class="input is-centered has-text-weight-semibold is_bg">
+                                                                            0<!--!-->%
+                                                                        </div>
+                                                                    </div>
+                                                                </td><!--!-->
+                                                                <td align="center"></td>
+                                                                <td align="center"></td>
+                                                            </tr>
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                <!--!-->
+                                <tr><td colspan="8"><hr class="m-0"></td></tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</section>
+@code {
+    [CascadingParameter]
+    public MainLayout layoutmain { get; set; }
+    List<UseModel> listUse = new();
+    List<okrModel> listOkr = new();
+    Dictionary<okrModel, OkrCheckInModel> data = new();
+    private int checkSee = 0;
+    protected override async Task OnInitializedAsync()
+    {
+        listUse = await DbUse.GetAll();
+        hiddenList = listOkr.Select(x => x.id).ToList();
+        listOkr = await DbOkr.GetAll();
+        FoMartData();
+    }
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    private List<string> hiddenList = new();
+    private void ToggleOKR(string id)
+    {
+        if (!hiddenList.Contains(id))
+            hiddenList.Add(id);
+        else
+            hiddenList.RemoveAll(x => x == id);
+    }
+    // format dữ liệu của okr và okrcheckin để add vào Dictionary data
+    private async Task FoMartData()
+    {
+        foreach (var orkcc in listOkr)
+        {
+            //List<OkrCheckInModel> okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            //OkrCheckInModel> okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            OkrCheckInModel okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            if (okrCheckin == null)
+            {
+                okrCheckin = new();
+            }
+            data.Add(orkcc, okrCheckin);
+        }
+    }
+    // phương thức tính
+    private double CalPercent(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double result = 0;
+        foreach (var key in keys)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentKey(List<okrModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double target = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+
+    }
+    private double CalPercentTagertKey(List<okrModel.KeyResult> keys)
+    {
+        double target = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    private double CalYou(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.staff_point;
+            result += k;
+        }
+
+        result = result / keys.Count();
+        result = Math.Round(result, 2);
+        return result;
+
+    }
+    private double CalYouKey(List<okrModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.review_data.staff_point;
+            result += k;
+        }
+        result = result / keys.Count();
+        result = Math.Round(result, 2);
+        return result;
+    }
+    private double CalMan(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.manager_point;
+            result += k;
+        }
+        result = result / keys.Count();
+        result = Math.Round(result, 2);
+        return result;
+
+    }
+    private double CalManKey(List<okrModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.review_data.manager_point;
+            result += k;
+        }
+        result = result / keys.Count();
+        result = Math.Round(result, 2);
+        return result;
+    }
+}

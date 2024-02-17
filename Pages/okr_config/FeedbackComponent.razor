@@ -1,0 +1,178 @@
+﻿@page "/admin/gopy"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+<div class="card flex_column is_fullheight" style="flex:1;overflow:hidden ; margin : 20px"  >
+    <!--!--><!--!--><!--!--><!--!--><ul class="columns is-variable is-2 mb-2 is-vcentered">
+        <!--!-->
+        <li class="column">
+            <h1 class="title is-5 has-text-info is-uppercase">
+                Cấu hình loại phiếu góp ý
+            </h1>
+        </li>
+        <li class="column is-narrow" @onclick = "addFB" >
+            <a class="button">
+                <!--!--><span class="icon"><span class="material-icons-outlined is-size-6">add</span></span>
+                <!--!--><span>Thêm mới</span>
+            </a>
+        </li>
+    </ul><!--!-->
+    <div class="scrolly inner_section" style="flex:1">
+        <table class="table is-fullwidth is-vcentered is-responsive">
+            <!--!-->
+            <thead>
+                <tr>
+                    <th class="pt-0">Tên loại phiếu</th>
+                    <th class="pt-0" width="70px" align="center">Xử lý</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var sugset in okr_config.suggests)
+                {
+                <tr>
+                        <td><span class="has-text-weight-semibold"> @sugset.name </span></td><!--!-->
+                    <td align="center">
+                        <!--!--><label class="td-label">Xử lý</label>
+                        <div class="td-value">
+                            <a class="icon has-text-link" title="Chỉnh sửa" @onclick = "@(e=>showUpdate(sugset))" >
+                                <!--!--><i class="material-icons-outlined is-size-5">
+                                    edit
+                                </i>
+                            </a><!--!-->
+                                <a class="icon has-text-danger" title="Xóa" @onclick="@(e=> Delete(sugset.id))">
+                                <!--!--><i class="material-icons-outlined is-size-5">
+                                    delete
+                                </i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+@*mở form tạo*@
+@if(add == true)
+{
+    <div class="modal is-active">
+        <!--!--><div class="modal-background"></div>
+        <div class="modal-card">
+            <div class="modal-card-head">
+                <div class="modal-card-title">Tạo loại phiếu góp ý mới</div><!--!-->
+                <a class="delete"></a>
+            </div><!--!-->
+            <div class="modal-card-body">
+                <form>
+                    <div class="field">
+                        <!--!--><label class="label">Tên loại phiếu góp ý</label>
+                        <div class="control"><input type="text" class="input" @bind = "@suggest.name" >  </div>
+                    </div><!--!-->
+                    <div class="field mt-5">
+                        <div class="buttons is-right" >
+                            <a class="button" @onclick="addFB">
+                                <!--!-->
+                                Hủy
+                            </a><!--!-->
+                            <a class="button is-link" @onclick="Create" >
+                                <!--!--><span class="icon"   >
+                                    <span class="material-icons-outlined is-size-6">
+                                        done
+                                    </span>
+                                </span>
+                                <!--!--><span>Cập nhật</span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+@*form update *@
+@if(update)
+{
+<div class="modal is-active">
+    <!--!--><div class="modal-background"></div>
+    <div class="modal-card">
+        <div class="modal-card-head">
+            <div class="modal-card-title">Tạo loại phiếu góp ý mới</div><!--!-->
+            <a class="delete"></a>
+        </div><!--!-->
+        <div class="modal-card-body">
+            <form>
+                <div class="field">
+                    <!--!--><label class="label">Tên loại phiếu góp ý</label>
+                    <div class="control"><input type="text" class="input" @bind="@suggest.name">  </div>
+                </div><!--!-->
+                <div class="field mt-5">
+                    <div class="buttons is-right">
+                        <a class="button" @onclick="hidenUpdate">
+                            <!--!-->
+                            Hủy
+                        </a><!--!-->
+                        <a class="button is-link" @onclick="UpdateReal">
+                            <!--!--><span class="icon">
+                                <span class="material-icons-outlined is-size-6">
+                                    done
+                                </span>
+                            </span>
+                            <!--!--><span>Cập nhật</span>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+}
+@code {
+    private bool add = false;
+    private bool update = false;
+    private okrConfigModel okr_config = new();
+    private okrConfigModel.Suggest suggest = new();
+    // mở form add
+    private void addFB()
+    {
+        add = !add;
+    }
+    //mở form update
+    private void showUpdate(okrConfigModel.Suggest SugUpdate)
+    {
+        update = !update;
+        suggest = SugUpdate;
+    }
+    //ẩn form ẩn
+    private void hidenUpdate()
+    {
+        update = !update;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        okr_config.id = "241I20974A";
+        okr_config = await DbOkrConfig.Get(okr_config);
+    }
+    private async void Create()
+    {
+        Console.WriteLine("Click");
+        DbOkrConfig.AddSug(okr_config, suggest);
+        suggest = new();
+        add = !add;
+        okr_config = await DbOkrConfig.Get(okr_config);
+
+        //okr_config = 
+    }
+    private void Delete( string sugid)
+    {
+        Console.WriteLine(sugid);
+        Console.WriteLine("=============================");
+        DbOkrConfig.DeleteSug(okr_config, sugid);
+    }
+    private async void UpdateReal()
+    {
+        DbOkrConfig.UpdateSug(okr_config, suggest.id, suggest);
+        okr_config = await DbOkrConfig.Get(okr_config);
+        navigation.NavigateTo(navigation.Uri, true); 
+    }
+
+}

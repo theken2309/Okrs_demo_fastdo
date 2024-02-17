@@ -1,0 +1,390 @@
+﻿@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+
+@foreach (var i in data)
+{
+    @if (i.Key.user_create == layoutmain.IdU)
+    {
+        if (i.Key.cycle == layoutmain.cycid)
+        {
+            double per = i.Value == null ? 0 : CalPercent(i.Value.key_results);
+            double tar = i.Value == null ? 0 : CalPercentTagert(i.Value.key_results);
+           double roundedValue = Math.Round(i.Value.progress_prev, 2);
+
+            <tr>
+                <td><div class="is-flex"><a @onclick="()=>Update(i.Key)" class="has-text-weight-semibold" title="Chỉnh sửa OKRs">@i.Key.name </a></div></td><!--!-->
+                <td>
+                    <!--!--><label class="td-label">Kết quả</label>
+                    <div class="td-value" @onclick="() => ToggleOKR(i.Key.id)">
+                        <a class="icon-text has-text-weight-semibold has-text-info">
+                            <span> @i.Key.key_results.Count <!--!--> kết quả</span><!--!-->
+                            <span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                        </a>
+                    </div>
+                </td><!--!-->
+                <td>
+                    <!--!--><label class="td-label">Tiến độ</label>
+                    <div class="td-value">
+                        <div class="progress_has_value">
+                            <progress class="progress is-small is-dark" value="@per" max="@tar"></progress><!--!-->
+                            <span> @siuu(per,tar) %</span>
+                        </div>
+                    </div>
+                </td><!--!-->
+                <td align="center">
+                    <!--!--><label class="td-label">Thay đổi</label>
+                    <div class="td-value has-text-weight-semibold">
+
+                        @roundedValue <!--!-->%
+                    </div>
+                </td><!--!-->
+                <td align="center">
+                    <!--!--><label class="td-label">Ngày tạo</label>
+                    <div class="td-value"> @(new DateTime(i.Key.date_create).ToString("dd/MM/yyyy"))  </div>
+                </td>
+            </tr>
+            @*hiện Key của OKR*@
+            @if (!hiddenList.Contains(i.Key.id))
+            {
+                @if (i.Value.id == null)
+                {
+                    @foreach (var KeyR in i.Key.key_results)
+                    {
+                        <tr>
+                            <td class="pl-4">@KeyR.name  </td><!--!-->
+                            <td class="pl-2"></td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Đạt được</label>
+                                <div class="td-value">
+                                    <span class="has-text-success" title="00.000 / 100.000"> @KeyR.result /@KeyR.target </span><!--!-->
+                                    <span class="is-pulled-right"> @siuu(KeyR.result,KeyR.target)%</span>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Thay đổi</label>
+                                <div class="td-value">
+                                    @*@KeyR.change<!--!-->%*@
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value has-text-weight-semibold"><span></span></div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    @foreach (var KeyR in i.Value.key_results)
+                    {
+                        <tr>
+                            <td class="pl-4">@KeyR.name  </td><!--!-->
+                            <td class="pl-2"></td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Đạt được</label>
+                                <div class="td-value">
+                                    <span class="has-text-success" title="00.000 / 100.000"> @KeyR.result /@KeyR.target </span><!--!-->
+                                    <span class="is-pulled-right">  @siuu(KeyR.result,KeyR.target)%</span>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Thay đổi</label>
+                                <div class="td-value"> 
+                                    @*@KeyR.change<!--!-->%*@
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value has-text-weight-semibold"><span></span></div>
+                            </td>
+                        </tr>
+                    }
+
+
+                }
+            }
+        }
+
+    }
+}
+
+@*mở form update *@
+@if (update)
+{
+    <div class="slider is-large is-active" style="">
+        <div class="slider-header">
+            <div class="columns is-variable is-2 is-mobile is-vcentered">
+                <div class="column"><div class="has-text-weight-bold is-size-5">CHỈNH SỬA OKRs</div></div><!--!-->
+                <div class="column is-narrow"><!--!--><button class="button" @onclick="tat"><span class="icon"><span class="material-icons-outlined">close</span></span><span>Hủy tạo</span></button></div>
+            </div>
+        </div><!--!-->
+        <div class="slider-body">
+            <div class="scrolly is-mobile is-flex is-flex-direction-column">
+                <ul class="columns is-multiline is-vcentered is-mobile is-variable is-2">
+                    <!--!-->
+                    <li class="column is-one-fifth-tablet is-full-mobile"><label class="label has-text-weight-bold">Mục tiêu của bạn:</label></li>
+                    <li class="column is-four-fifths-tablet is-full-mobile"><input @bind="okr.name" type="text" class="input has-text-weight-semibold is_bg" placeholder="Bắt buộc nhập..."></li><!--!-->
+                    <!--!-->
+                    <li class="column is-one-fifth-tablet is-one-third-mobile"><label class="label has-text-weight-bold">OKRs cấp trên</label></li>
+                    <li class="column is-two-fifths-tablet is-two-thirds-mobile">
+                        <div class="select is-fullwidth is_bg">
+                            <select @bind="okr.parent">
+                                <option><!--!-->- Chọn OKRs cấp trên -</option>
+                            
+                            </select>
+                        </div>
+                    </li><!--!-->
+                    <li class="column is-one-fifth-tablet is-full-mobile">
+                        <div class="field is-grouped">
+                            <!--!--><div class="control"><label class="label has-text-weight-bold">Loại:</label></div>
+                            <div class="control is-expanded">
+                                <div class="select is-fullwidth is_bg">
+                                    <select @bind="okr.type">
+                                        <option value="2">OKRs cam kết</option>
+                                        <option value="1">OKRs mở rộng</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li><!--!-->
+                    <!--!-->
+                    <li class="column is-full"><hr class="m-0"></li>
+                </ul><!--!-->
+                @foreach (var kr in okr.key_results)
+                {
+                    var index = okr.key_results.FindIndex(x => x.id == kr.id);
+
+                    <ul class="columns is-multiline is-mobile is-variable is-2">
+                        <!--!-->
+                        <li class="column is-one-fifth-tablet is-full-mobile"><label class="label pt-2">Kết quả then chốt:</label></li>
+                        <li class="column is-four-fifths-tablet is-full-mobile">
+                            <div class="field has-addons">
+                                <div class="control is-expanded">
+                                    <input type="text" class="input is_bg" placeholder="Bắt buộc nhập..." @bind="kr.name">
+                                </div><!--!-->
+                                <div class="control"><a class="button is-danger" title="Xóa kết quả then chốt" @onclick="(e)=>DeleteKey(kr)"><!--!--><span class="icon"><i class="material-icons-outlined is-size-5">close</i></span></a></div>
+
+                            </div>
+                        </li><!--!-->
+                        <!--!-->
+                        <li class="column is-one-fifth-tablet is-one-third-mobile"><label class="label pt-2">Mục tiêu:</label></li>
+                        <li class="column is-two-fifths-tablet is-two-thirds-mobile">
+                            <div class="field is-grouped">
+                                <div class="control is-expanded"><!--!--><input class="input is_bg" type="text" placeholder="Nhập số liệu mục tiêu" @bind="kr.target"></div><!--!-->
+                                <div class="control" style="width: 100px;"><input type="text" class="input is_bg" placeholder="Đơn vị tính" @bind="kr.unit"></div>
+                            </div>
+                        </li><!--!-->
+                        <li class="column is-two-fifths-tablet is-full-mobile">
+                            <div class="field is-grouped">
+                                <!--!--><div class="control"><label class="label">Kết quả:</label></div>
+                                <div class="control is-expanded"><input type="text" class="input is_bg" placeholder="Nhập link kết quả..." @bind="kr.link"></div>
+                            </div>
+                        </li><!--!-->
+                        <!--!-->
+                        <li class="column is-one-fifth-tablet is-half-mobile"><div class="label pt-2">Liên kết chéo:</div></li>
+                        <li class="column is-four-fifths-tablet is-full-mobile">
+                            <ul class="columns is-multiline">
+                                <li class="column is-half">
+                                    <!--!--><div class="control has-icons-right has_suggest">
+                                        <input class="input is_bg show_is_active" type="text" placeholder="Chọn người liên kết chéo..." autocomplete="off"><!--!-->
+                                        <ul class="suggest"></ul><!--!-->
+                                        <!--!--><span class="icon is-right"><i class="material-icons-outlined">search</i></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <li class="column is-full"><hr class="m-0"></li>
+
+                    @if (string.IsNullOrEmpty(kr.name) || kr.target < 1 || string.IsNullOrEmpty(kr.unit)) checkKR = false;
+                    else checkKR = true;
+
+                }
+            </div>
+        </div><div class="slider-footer">
+            <div class="field is-grouped is-grouped-right is-grouped-multiline">
+                <div class="control">
+                    <a class="button" @onclick="addKey">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">add</i></span>
+                        <!--!--><span>Thêm</span>
+                        <!--!--><span class="is-hidden-mobile ml-1">kết quả</span>
+                    </a>
+                </div><!--!-->
+                <div class="control">
+                    <a class="button is-link" @onclick="@(e=>UpdateOKR(okr))">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                        <span>Cập nhật</span><!--!-->
+                        <!--!--><span class="is-hidden-mobile ml-1">OKRs</span>
+                    </a>
+                </div><!--!-->
+                <div class="control">
+                    <a class="button is-danger" @onclick="@(e=>DeleteOKR(okr))">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">delete</i></span>
+                        <!--!--><span>Xóa</span>
+                        <!--!--><span class="is-hidden-mobile ml-1">OKRs</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@code {
+    bool checkKR;
+    [Parameter]
+    public List<okrModel> listOkr { get; set; }
+    [CascadingParameter]
+    public MainLayout layoutmain { get; set; }
+    bool update = false;
+    private Dictionary<okrModel, OkrCheckInModel> data = new();
+
+    okrModel okr = new();
+    // tạo ra 1 list để chứa id các okr ẩn KR
+    private List<string> hiddenList = new();
+    List<UseModel> listUser = new();
+    // check xem KR
+    // tạo sự kiện toogle khi click vào thì KR sẽ ẩn , dựa vào id
+    private void ToggleOKR(string id)
+    {
+        if (!hiddenList.Contains(id))
+            hiddenList.Add(id);
+        else
+            hiddenList.RemoveAll(x => x == id);
+    }
+    private void tat()
+    {
+        update = false;
+    }
+    // mở form update và truyền thông số cần update
+    private void Update(okrModel okrupdate)
+    {
+        update = true;
+        okr = okrupdate;
+    }
+    //Update OKR
+    private void UpdateOKR(okrModel okrupdatenew)
+    {
+        if (okr.name == null)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Nhập các mục tiêu của bạn!");
+
+        }
+        else if (okr.key_results.Count == 0)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Chưa có KR");
+
+        }
+        else if (okr.cycle == null)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Chưa chọn Chu Kỳ");
+        }
+        else if (okr.type == 0)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Chưa chọn loại OKRs");
+
+        }
+        else if (checkKR == false)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Vui Lòng nhập lại Kết quả then chốt");
+
+        }
+        else
+        {
+            tat();
+            Console.WriteLine("click");
+            okrupdatenew = okr;
+            DbOkr.Update(okrupdatenew);
+            JSRuntime.InvokeVoidAsync("tagline", true, "Cập nhật thành công");
+        }
+
+
+    }
+    //Xoá OKR
+    private async void DeleteOKR(okrModel OkrDelete)
+    {
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Bạn có chắc muốn xóa OKRs: {OkrDelete.name} ?"))
+            return;
+        JSRuntime.InvokeVoidAsync("tagline", true, "Xoá Thành công!");
+        DbOkr.Delete(OkrDelete);
+        tat();
+        Console.WriteLine("click Delete");
+        navigation.NavigateTo(navigation.Uri, forceLoad: true);
+        //FoMartData();
+        StateHasChanged();
+    }
+    // thêm Key mới
+    private void addKey()
+    {
+        if (okr != null)
+        {
+            var item = new okrModel.KeyResult
+                {
+                    id = MongoDb.RandomId(),
+                    cross_links = new()
+                };
+            // thêm RK và List KR
+            okr.key_results.Add(item);
+        }
+    }
+    //Xoá Key
+    private async Task DeleteKey(okrModel.KeyResult item)
+    {
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Bạn có chắc muốn xóa kết quả then chốt: {item.name} ?"))
+            return;
+
+        okr.key_results.Remove(item);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        FoMartData();
+        // LinQ các truyền tất cả id của listOKR vào hiddenList để ẩn hết tất cả các KR của OKR
+        hiddenList = listOkr.Select(x => x.id).ToList();
+        okr.type = 1;
+    }
+    // các phương tính
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    private double CalPercent(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert(List<OkrCheckInModel.KeyResult> keys)
+    {
+        double target = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    // truyền dữ liệu của các okr cho data
+    private async Task FoMartData()
+    {
+        listOkr = await DbOkr.GetAll();
+        foreach (var orkcc in listOkr)
+        {
+            //List<OkrCheckInModel> okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            //OkrCheckInModel> okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            OkrCheckInModel okrCheckin = await DbOkrCheckin.GetByOkrID(orkcc.id);
+            if (okrCheckin == null) okrCheckin = new();
+            data.Add(orkcc, okrCheckin);
+        }
+    }
+}

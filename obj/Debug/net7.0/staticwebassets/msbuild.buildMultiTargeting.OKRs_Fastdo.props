@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\OKRs_Fastdo.props" />
+</Project>

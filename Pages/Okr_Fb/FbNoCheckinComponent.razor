@@ -1,0 +1,59 @@
+﻿ @*Fb của okr chưa có checkin *@
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <div class="tabs">
+        <div class="tabs_name">
+            <a class="icon-text px-0 has-text-link has-text-weight-normal is-size-6" href="/okr/checkin/">
+                <!--!--><span class="icon">
+                    <span class="material-icons-outlined">
+                        keyboard_backspace
+                    </span>
+                </span>
+                <!--!--><span>
+                    Trở về
+                </span>
+            </a><!--!-->
+            <!--!--><span class="icon-text">
+                <span>
+                    Chi tiết OKRs
+                </span>
+            </span>
+        </div><!--!-->
+        <ul>
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okrID/info">Check-in 1:1</a></li><!--!-->
+            <li class="is-active"><a class="has-text-weight-normal" href="/okr/checkin/@okrID/feedback"><!--!-->Phản hồi</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okrID/overview"><!--!-->Tổng quan</a></li>
+        </ul>
+    </div><section class="main_content">
+        <div class="card">
+            <ul class="columns is-vcentered is-variable is-2 mb-2">
+                <!--!-->
+                <li class="column">
+                    <h1 class="title is-5 has-text-info">
+                        PHẢN HỒI CHECK-IN
+                    </h1>
+                </li>
+                <li class="column is-narrow">
+                    <div class="field is-grouped">
+                        <!--!--><div class="control has-text-weight-semibold">
+                            Chu kỳ Check-in:
+                        </div>
+                        <div class="control is-expanded"><div class="select is-fullwidth"><select><option value=""><!--!-->Chưa có Check-in</option></select></div></div>
+                    </div>
+                </li>
+            </ul><!--!-->
+            <div class="inner_section">
+                <!--!--><div class="py-6 has-text-centered has-text-grey">
+                    Chưa có dữ liệu check-in
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+@code {
+    [Parameter]
+    public string okrID{ get; set; }
+
+}

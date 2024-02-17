@@ -1,0 +1,383 @@
+﻿    @*trang chính chủ vào xem okr và có thể làm gì thì làm *@
+@if(okr_checkin != null)
+{
+    <section id="content" class="column has_sidebar ">
+        <!--!--><!--!--><!--!--><div class="tabs">
+            <div class="tabs_name">
+                <a class="icon-text px-0 has-text-link has-text-weight-normal is-size-6" href="/okr/checkin">
+                    <!--!--><span class="icon">
+                        <span class="material-icons-outlined">
+                            keyboard_backspace
+                        </span>
+                    </span>
+                    <!--!--><span>
+                        Trở về
+                    </span>
+                </a><!--!-->
+                <!--!--><span class="icon-text">
+                    <span>
+                        Chi tiết OKRs
+                    </span>
+                </span>
+            </div><!--!-->
+            <ul>
+                <li class="is-active"><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/info">Check-in 1:1</a></li><!--!-->
+                <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/@okr_checkin.id/feedback"><!--!-->Phản hồi</a></li><!--!-->
+                <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/overview"><!--!-->Tổng quan</a></li>
+            </ul>
+        </div><!--!-->
+        <section class="main_content">
+            <div class="card">
+                <ul class="columns is-vcentered is-variable is-2 mb-5">
+                    <!--!-->
+                    <li class="column">
+                        <h1 class="title is-5 has-text-info">
+                            CHECK-IN 1:1
+                        </h1>
+                    </li>
+                    <li class="column is-narrow">
+                        <div class="field is-grouped">
+                            <!--!--><div class="control has-text-weight-semibold">
+                                Chu kỳ Check-in:
+                            </div>
+                            <div class="control is-expanded">
+                                <div class="select is-fullwidth">
+                                    <select @onchange="Xem">
+                                        @if (listTime.Count > 0)
+                                        {
+                                            @foreach (var item in listTime)
+                                            {
+                                                @if (item.okr == okr_ne.id)
+                                                {
+                                                    <option value="@item.date_checkin">
+                                                        @(new DateTime(item.date_checkin).ToString("dd/MM/yyyy"))
+                                                        @if (item.status == 1)
+                                                        {
+                                                            <h1> bản checkin nháp </h1>
+                                                        }
+                                                    </option>
+                                                }
+                                                }
+                                            }
+                                        else
+                                        {
+                                         <option> Chưa có checkin nào </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li><!--!-->
+                    @if(okr_ne.status_checkin == 0)
+                    {
+                          <li class="column is-narrow">
+                                <a class="button is-link" href=@($"/okr/checkin/{okr_ne.id}/add")>
+                                    <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">edit</i></span>
+                                    <!--!--><span>Tạo Check-in Nháp</span>
+                                </a>
+                            </li>
+                    }
+
+                    @if (okr_ne.status_checkin == 1    ) // trang thai okr dang checkin nhap
+                    {
+                        if (okr_checkin.checkin == false)
+                        {
+                            <li class="column is-narrow">
+                                <a class="button is-link" href=@($"/okr/checkin/{okr_ne.id}/{okr_checkin.id}")>
+                                    <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">edit</i></span>
+                                    <!--!--><span>Sửa bản nháp</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="column is-narrow">
+                                <!--!--><span class="button is-white has-text-link">
+                                    <span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                                    <span>Đã Check-in</span>
+                                </span>
+                            </li>
+                        }
+
+
+                    }
+                    else if (okr_ne.status_checkin == 2) // trang thai okr da duoc quan ly duyet
+                    {
+                        <li class="column is-narrow">
+                            <a class="button is-link" href="/okr/checkin/@okr_ne.id/@okr_checkin.id" >
+                                <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">format_list_bulleted</i></span>
+                                <!--!--><span>Check-in</span>
+                            </a>
+                        </li>
+                    }
+                    else if (okr_ne.status_checkin == 3)
+                    {
+                        <li class="column is-narrow">
+                            <a class="button is-link" href="/okr/checkin/@okr_ne.id/add">
+                                <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">add</i></span>
+                                <span> Tạo Check-in nháp</span>
+                            </a>
+                        </li>
+                    }
+
+                </ul><table class="table is-fullwidth is-noborder is-responsive">
+                    <!--!-->
+                    <thead>
+                        <tr>
+                            <th>Mục tiêu</th>
+                            <th width="250px" align="center">Tiến độ</th>
+                            <th width="100px" align="center">Thay đổi</th>
+                            <th width="100px" align="center">Tự tin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="is-flex"><span class="has-text-weight-semibold has-text-link">@okr_ne.name</span></div></td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Tiến độ</label>
+                                <div class="td-value">
+                                    <div class="progress_has_value">
+                                        <progress class="progress is-small is-warning" value="@CalPercent()" max="@CalPercentTagert()"></progress><!--!-->
+                                        <span> @siuu(CalPercent(),CalPercentTagert()) % </span>
+                                    </div>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Thay đổi</label>
+                                <div class="td-value has-text-weight-semibold">
+                                     @((decimal)okr_checkin.progress_prev) <!--!-->%
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value has-text-weight-semibold">
+                                    @if (okr_checkin.confident == 0)
+                                    {
+
+                                    }
+                                    else if (okr_checkin.confident == 1)
+                                    {
+                                        <span>
+                                            <span class="has-text-success">Rất tốt</span>
+                                        </span>
+                                    }
+                                    else if (okr_checkin.confident == 2)
+                                    {
+                                        <span>
+                                            <span class="has-text-warning">Ổn</span>
+                                        </span>
+                                    }
+                                    else if (okr_checkin.confident == 3)
+                                    {
+                                        <span>
+                                            <span class="has-text-danger">Không ổn</span>
+                                        </span>
+                                    }
+
+                                </div>
+                            </td>
+                        </tr>
+                        @if(okr_checkin.id == null)
+                        {
+                        @foreach (var keyCheckin in okr_ne.key_results)
+                        {
+                            <!--!-->
+                            <!--!-->
+                            <tr class="tr-hide"><td colspan="4"><hr class="m-0"></td></tr>
+                            <!--!-->
+                            <tr class="tr-hide">
+                                <td>Kết quả then chốt</td>
+                                <td align="center">Đạt được</td>
+                                <td align="center">Thay đổi</td>
+                                <td align="center">Tự tin</td>
+                            </tr>
+                            <tr>
+                                <td><span class="has-text-weight-semibold has-text-link"> @keyCheckin.name </span></td><!--!-->
+                                <td>
+                                    <!--!--><label class="td-label">Đạt được</label>
+                                    <div class="td-value has-text-right">
+                                        <span class="has-text-success" title="55/111"> @keyCheckin.result / @keyCheckin.target  </span><!--!-->
+                                        <span>lần test</span>
+                                    </div>
+                                </td><!--!-->
+                                <td align="center">
+                                    <!--!--><label class="td-label">Thay đổi</label>
+                                    <div class="td-value">
+                                      
+                                    </div>
+                                </td><!--!-->
+                                <td align="center">
+                                    <!--!--><label class="td-label">Tự tin</label>
+                                </td>
+                            </tr>
+
+                            <!--!-->
+                         @*   <tr>
+                                <td colspan="4" class="pl-6 pb-4">
+                                    <ul class="columns is-multiline is-variable is-2">
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Tiến độ, kết quả công việc?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!--> @keyCheckin.question1  </div>
+                                        </li>
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Công việc nào đang &amp; sẽ chậm tiến độ?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!-->@keyCheckin.question2</div>
+                                        </li>
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Trở ngại, khó khăn là gì?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!-->@keyCheckin.question3</div>
+                                        </li>
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Cần làm gì để vượt qua trở ngại?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!-->@keyCheckin.</div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>*@
+                            }
+
+                        }
+                        else
+                        {
+                        @foreach (var keyCheckin in okr_checkin.key_results)
+                        {
+                            <!--!-->
+                            <!--!-->
+                            <tr class="tr-hide"><td colspan="4"><hr class="m-0"></td></tr>
+                            <!--!-->
+                            <tr class="tr-hide">
+                                <td>Kết quả then chốt</td>
+                                <td align="center">Đạt được</td>
+                                <td align="center">Thay đổi</td>
+                                <td align="center">Tự tin</td>
+                            </tr>
+                            <tr>
+                                <td><span class="has-text-weight-semibold has-text-link"> @keyCheckin.name </span></td><!--!-->
+                                <td>
+                                    <!--!--><label class="td-label">Đạt được</label>
+                                    <div class="td-value has-text-right">
+                                        <span class="has-text-success" title="55/111"> @keyCheckin.result / @keyCheckin.target  </span><!--!-->
+                                        <span>lần test</span>
+                                    </div>
+                                </td><!--!-->
+                                <td align="center">
+                                    <!--!--><label class="td-label">Thay đổi</label>
+                                    <div class="td-value">
+                                      
+                                    </div>
+                                </td><!--!-->
+                                <td align="center">
+                                    <!--!--><label class="td-label">Tự tin</label>
+                                    <div class="td-value has-text-weight-semibold"><span class="has-text-info">Ổn</span></div>
+                                </td>
+                            </tr>
+
+                            <!--!-->
+                            <tr>
+                                <td colspan="4" class="pl-6 pb-4">
+                                    <ul class="columns is-multiline is-variable is-2">
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Tiến độ, kết quả công việc?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!--> @keyCheckin.question1  </div>
+                                        </li>
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Công việc nào đang &amp; sẽ chậm tiến độ?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!-->@keyCheckin.question2</div>
+                                        </li>
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Trở ngại, khó khăn là gì?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!-->@keyCheckin.question3</div>
+                                        </li>
+                                        <li class="column is-full">
+                                            <div class="has-text-grey pb-2">Cần làm gì để vượt qua trở ngại?</div><!--!-->
+                                            <div class="has_bg is_radius p-3 is-word-break"><!--!-->@keyCheckin.question4</div>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+}
+
+@code {
+    [Parameter]
+    public OkrCheckInModel okr_checkin { get; set; }
+    [Parameter]
+    public okrModel okr_ne { get; set; }
+    List<OkrCheckITimeModel> listTime = new();
+
+
+    // 
+    protected override async void OnInitialized()
+    {
+        listTime = await DbOkrCheckinTime.GetAll();
+    }
+
+    protected override void OnParametersSet()
+    {
+        okr_checkin = okr_checkin == null ? new() : okr_checkin;
+    }
+
+    private async Task Xem(ChangeEventArgs e)
+    {
+        var value = e.Value.ToString();
+        if (!string.IsNullOrEmpty(value) && long.TryParse(value, out var date_check) && okr_checkin != null)
+        {
+            okr_checkin.date_create = date_check;
+            okr_checkin = await DbOkrCheckin.GetTheoTime(okr_checkin);
+            Console.WriteLine(okr_checkin == null);
+            
+            //Console.WriteLine(okr_checkin.id);
+            //Console.WriteLine(timeCheck);
+        }
+    }
+    private double Cen(double a, double b)
+    {
+        double result = a / b * 100;
+        return Math.Round(result, 2);
+    }
+    private double CalPercent()
+    {
+        double result = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert()
+    {
+        double target = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    private void cc()
+    {
+        foreach(var time in listTime)
+        {
+            
+        }
+    }
+
+}

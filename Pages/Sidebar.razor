@@ -1,0 +1,75 @@
+﻿@inject NavigationManager navigation
+@inject IJSRuntime JSRuntime
+<div class="sidebar ">
+    <!--!--><section id="sidebar" class="is_less ">
+        <a class="button is-white toggle"><span class="icon"><span class="material-icons-outlined">menu</span></span></a><!--!-->
+        <a class="button is-white module-pin">
+            <span class="icon is-hidden-mobile" style="margin-left:auto">
+                <span class="is-size-6 material-icons-outlined">
+                    <!--!-->
+                    push_pin
+                </span>
+            </span>
+        </a><a class="icon-text module-name"><span class="icon"><span class="material-icons-outlined">fact_check</span></span><span>Check in</span></a><nav class="scrolly mt-4">
+            <ul>
+                <h1></h1>
+                <li class="">
+                    <a class="button is-white" href="/okr">
+                        <span class="icon"><i class="material-icons-outlined is-size-6">task</i></span><!--!-->
+                        <span>Tạo OKR </span>
+                    </a>
+                </li>
+               
+                <li class="">
+                    <a class="button is-white" href="/okr/checkin">
+                        <span class="icon"><i class="material-icons-outlined is-size-6">fact_check</i></span><!--!-->
+                        <span>Check in</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="button is-white" href="/okr/review">
+                        <span class="icon"><i class="material-icons-outlined is-size-6">reviews</i></span><!--!-->
+                        <span>Đánh giá</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="button is-white" href="/okr/suggest">
+                        <span class="icon"><i class="material-icons-outlined is-size-6">reviews</i></span><!--!-->
+                        <span>Góp ý mục tiêu</span>
+                    </a>
+                </li>
+                @if (lauoutmain.quyen == "3")
+                {
+                <li class="">
+                    <a class="button is-white" href="/admin">
+                        <span class="icon"><i class="material-icons-outlined is-size-6">reviews</i></span><!--!-->
+                        <span> Tạo Chu Kỳ </span>
+                    </a>
+                </li>
+                    <li class="">
+                        <a class="button is-white" href="/admin/gopy">
+                            <span class="icon"><i class="material-icons-outlined is-size-6">reviews</i></span><!--!-->
+                            <span> Góp Ý</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav><!--!-->
+        <a class="button is-white btn_logout" title="Đăng xuất"  @onclick = "Logout" >
+            <!--!--><span class="icon"><i class="material-icons-round is-size-6">logout</i></span>
+            <!--!--><span>Đăng xuất</span>
+        </a>
+    </section><section class="sidebar_overlay"></section>
+</div>
+@code{
+    [CascadingParameter]
+    public MainLayout lauoutmain { get; set; }
+    private async Task Logout()
+    {
+        await JSRuntime.InvokeVoidAsync("deleteCookie", "_user");
+        //await JSRuntime.InvokeAsync<string>("delete", "_user");
+        navigation.NavigateTo("/", true);
+
+    }
+
+}

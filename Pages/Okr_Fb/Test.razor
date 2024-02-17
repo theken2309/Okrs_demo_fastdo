@@ -1,0 +1,53 @@
+﻿@page "/linechart"
+@inject IJSRuntime JSRuntime
+
+<h3>Biểu đồ Đường</h3>
+
+<canvas id="lineChartCanvas" width="400" height="200"></canvas>
+
+@*<script>
+    window.drawLineChart = (canvasId, data) => {
+        var ctx = document.getElementById(canvasId).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    };
+</script>*@
+
+@code {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            DrawLineChart();
+        }
+    }
+
+    private void DrawLineChart()
+    {
+        var data = new
+        {
+            labels = new[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6" },
+            datasets = new[]
+            {
+                new
+                {
+                    label = "Doanh số bán hàng",
+                    data = new[] { 50, 60, 10, 65, 80, 75 },
+                    borderColor = "rgba(75, 192, 192, 1)",
+                    fill = false,
+                }
+        }
+        };
+
+        JSRuntime.InvokeVoidAsync("drawLineChart", "lineChartCanvas", data);
+    }
+}

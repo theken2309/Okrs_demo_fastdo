@@ -1,0 +1,26 @@
+﻿@page "/okr/checkin/{okrId}/{idOkrCheckin}/feedback"
+@page "/okr/checkin/{okrId}/feedback"
+
+@if(okr_ne.delete == false )
+{
+    //nếu okr đã có checkin rồi thì mới có thể feedback
+    <FbNoCheckinComponent okrID="@okrID" />
+} 
+else{
+    //okr chưa có dữ liệu checkin
+   <FBackneComponent  idOkrCheckin="@idOkrCheckin" okrID="@okrID" />
+}
+@code {
+    [Parameter]
+    public string okrID{ get; set; }
+    [Parameter]
+    public string idOkrCheckin { get; set; }
+    private okrModel okr_ne = new();
+    protected override async void OnInitialized()
+    {
+        okr_ne.id = okrID;
+        okr_ne = await DbOkr.Get(okr_ne);
+    }
+
+   
+}

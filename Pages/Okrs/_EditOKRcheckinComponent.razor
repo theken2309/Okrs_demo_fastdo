@@ -1,0 +1,395 @@
+﻿@page "/okr/checkin/{okrID}/{idOkrCheckin}"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+@using OKRs_Fastdo.Data
+@using OKRs_Fastdo.Models
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <div class="tabs">
+        <div class="tabs_name">
+            <a class="icon-text px-0 has-text-link has-text-weight-normal is-size-6" href="/okr/checkin/">
+                <!--!--><span class="icon">
+                    <span class="material-icons-outlined">
+                        keyboard_backspace
+                    </span>
+                </span>
+                <!--!--><span>
+                    Trở về
+                </span>
+            </a><!--!-->
+            <!--!--><span class="icon-text">
+                <span>
+                    Chi tiết OKRs
+                </span>
+            </span>
+        </div><!--!-->
+        <ul>
+                <li class="is-active"><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/info">Check-in 1:1</a></li><!--!-->
+                <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/@okr_checkin.id/feedback"><!--!-->Phản hồi</a></li><!--!-->
+                <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/overview"><!--!-->Tổng quan</a></li>
+        </ul>
+    </div><section class="main_content">
+        <div class="card">
+            <ul class="columns is-vcentered is-variable is-2 mb-5">
+                <!--!-->
+                <li class="column">
+                    <h1 class="title is-5 has-text-info">
+                        CHECK-IN 1:1
+                    </h1>
+                </li>
+                @*checkin nhap hoặc chưa có checkin *@
+                @if(okr_ne.status_checkin == 1 && okr_checkin.checkin == false )
+                {
+                <li class="column is-narrow" @onclick = "Delete"  >
+                    <a class="button is-danger">
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">delete</i></span>
+                        <!--!--><span>Xóa bản nháp</span>
+                    </a>
+                </li>
+                }
+            </ul><!--!-->
+            <table class="table is-fullwidth is-vcentered is-noborder is-responsive mb-0">
+                <!--!-->
+                <thead>
+                    <tr>
+                        <th>Mục tiêu</th>
+                        <th width="200px" align="center">Tiến độ  </th>
+                        <th width="100px" align="center">Thay đổi</th>
+                        <th width="120px" align="center">Tự tin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="has-text-weight-semibold has-text-link"> @okr_ne.name </span></td><!--!-->
+                        <td>
+                            <!--!--><label class="td-label">Tiến độ</label>
+                            <div class="td-value">
+                                <div class="progress_has_value">
+                                    <progress class="progress is-small is-warning" value="@CanResult()" max="@CanTargert()"></progress><!--!-->
+                                    <span> @siuu(CanResult(),CanTargert()) %</span>
+                                </div>
+                            </div>
+                        </td><!--!-->
+                        <td align="center">
+                            <!--!--><label class="td-label">Thay đổi</label>
+                            <div class="td-value has-text-weight-semibold">
+                               @okr_checkin.progress_prev <!--!-->%
+                            </div>
+                        </td><!--!-->
+                        <td align="center">
+                            <!--!--><label class="td-label">Tự tin</label>
+                            <div class="td-value"><div class="select is-fullwidth"><select @bind="okr_checkin.confident" ><option value="0"><!--!-->- Chọn -</option><option value="1">Rất tốt</option><option value="2">Ổn</option><option value="3">Không ổn</option></select></div></div>
+                        </td>
+                    </tr><!--!-->
+                    <!--!-->
+                    
+                    <tr><td colspan="4"><hr class="m-0"></td></tr>
+                    <!--!-->
+                    
+                    @foreach( var keyCI in okr_checkin.key_results)
+                    {
+                        double result = CanResult();
+                        double target = CanTargert();
+                        <tr>
+                            <td>Kết quả then chốt</td>
+                            <td align="center">Đạt được</td>
+                            <td></td>
+                            <td align="center">Tự tin  </td>
+                        </tr>
+                        <tr>
+                            <td><span class="has-text-weight-semibold has-text-link"> @keyCI.name </span></td><!--!-->
+                            <td colspan="2">
+                                <!--!--><label class="td-label">Đạt được</label>
+                                <div class="td-value">
+                                    <div class="field has-addons">
+                                        <div class="control" style="width: 140px"><!--!-->
+
+                                        <input @bind ="@keyCI.result" class="input has-text-right" type="text" placeholder="Đã đạt được" ></div><!--!-->
+                                        <div class="control is-expanded"><div class="button is-static has-text-link"> @keyCI.target @keyCI.unit  </div></div>
+                                    </div>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value"><div class="select is-fullwidth"><select @bind="keyCI.confident" ><option value="0"><!--!-->- Chọn -</option><option value="1">Rất tốt</option><option value="2">Ổn</option><option value="3">Không ổn</option></select></div></div>
+                            </td>
+                        </tr>
+
+                        <!--!-->
+                        <tr>
+                            <td colspan="4" class="pl-6 pb-4">
+                                <ul class="columns is-multiline is-variable is-2">
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Tiến độ, kết quả công việc?</div><!--!-->
+                                        <div class="control pt-2"><textarea @bind="keyCI.question1"  class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..."></textarea></div>
+                                    </li>
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Công việc nào đang &amp; sẽ chậm tiến độ?</div><!--!-->
+                                        <div class="control pt-2"><textarea @bind="keyCI.question2"  class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..."></textarea></div>
+                                    </li>
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Trở ngại, khó khăn là gì?</div><!--!-->
+                                        <div class="control pt-2"><textarea @bind="keyCI.question3"  class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..."></textarea></div>
+                                    </li>
+                                    <li class="column is-full">
+                                        <div class="has-text-grey">Cần làm gì để vượt qua trở ngại?</div><!--!-->
+                                        <div class="control pt-2"><textarea @bind="keyCI.question4"  class="textarea is_bg " rows="3" placeholder="Nhập đầy đủ thông tin bắt buộc..."></textarea></div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        @if (okr_ne.status_checkin == 2)
+                        {
+                            <div class="has-text-grey">Phản hồi KR</div>
+                            <div class="control pt-2"><textarea @bind="keyCI.feedback" class="textarea scrolly" rows="1" placeholder="Nhập phản hồi..."></textarea></div>
+                        }
+                        
+                    }
+                    
+                </tbody>
+            </table>
+            @*sửa bản nháp *@
+            @if(okr_ne.status_checkin == 1 ) 
+            {
+            <div class="field is-grouped">
+                <!--!--><div class="control">File đính kèm</div>
+                <div class="control"><!--!--><div class="control file_upload" _bl_d4e78336-9e92-472b-af70-5e06d1d6ffc2=""><a class="button is-outlined is-link " onclick="document.getElementById('file_241N6EC7C4').click()" title="Chọn file" style="border-radius: 6px; width: 24px; height: 24px; padding: 0px;"><!--!--><span class="icon"><i class="material-icons-outlined is-size-6">upload</i></span></a><!--!--><input id="file_241N6EC7C4" class="is-hidden" multiple="" accept="*" type="file" _bl_01c234eb-7762-461d-b7e3-67aefcfa3709=""><!--!--><span style="opacity:0;pointer-events:none;position:absolute">Chọn file</span></div></div>
+            </div><!--!-->
+            <!--!--><ul style="" class="columns is-multiline is-vcentered is-variable is-1 is-mobile "></ul><div class="field is-grouped is-grouped-multiline mt-5">
+                <div class="control" style="width: 650px;">
+                    <ul class="columns is-multiline is-vcentered is-mobile is-variable is-1">
+                        <!--!-->
+                        <li class="column is-narrow">
+                            Chọn quản lý check-in
+                        </li>
+                        <li class="column is-one-quarter">
+                            <!--!--><!--!--><div id="dropdown_1b84d67d" class="dropdown is-up  ">
+                                <div class="dropdown-trigger">
+                                    <a class="icon-text">
+                                        <span class="has-text-link is-block" style="max-width: 200px;">Tất cả phòng ban</span><!--!-->
+                                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!--!-->
+                        <li class="column is-narrow">
+                            <!--!--><div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                                <select @bind="okr_checkin.user_checkin" > 
+                                    <option> chọn người checkin</option>
+                                    @foreach (var item in listuser)
+                                        {
+                                            <option value="@item.id" >  @item.nameUse </option>
+                                        }
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                </div><div class="control is-expanded has-text-right">
+                    <!--!--><a class="button is-white has-text-danger" onclick="goBack()"><span>Hủy nhập</span></a>
+                    <a class="button is-link" @onclick = "Update" >
+                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                        <!--!--><span>Hoàn tất</span>
+                    </a>
+                </div>
+                </div>
+            }
+            else if(okr_ne.status_checkin == 2)
+            {
+                <div class="field is-grouped">
+                    <!--!--><div class="control">File đính kèm</div>
+                    <div class="control"><!--!--><div class="control file_upload" _bl_c9bd4360-cc76-43bb-a515-e61e99575709=""><a class="button is-outlined is-link " onclick="document.getElementById('file_241OB0388A').click()" title="Chọn file" style="border-radius: 6px; width: 24px; height: 24px; padding: 0px;"><!--!--><span class="icon"><i class="material-icons-outlined is-size-6">upload</i></span></a><!--!--><input id="file_241OB0388A" class="is-hidden" multiple="" accept="*" type="file" _bl_04c77dd0-5ce5-4617-ad11-dc2527335c5b=""><!--!--><span style="opacity:0;pointer-events:none;position:absolute">Chọn file</span></div></div>
+                </div>
+                <div class="field is-grouped is-grouped-multiline mt-5">
+                    <!--!-->
+                   
+                    <div class="control is-expanded pl-3">
+                        <label class="checkbox">
+                            <input type="checkbox" @bind = "okr_ne.done" ><!--!-->
+                            <!--!--><span class="has-text-weight-semibold">Hoàn thành OKRs</span>
+                        </label>
+                    </div><!--!-->
+                    <div class="control">
+                        <!--!--><a class="button is-white has-text-danger" ><span>Trở về</span></a>
+                        <a class="button is-link" @onclick = "DoneOkr" >
+                            <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                            <!--!--><span>Hoàn tất Check-in</span>
+                        </a>
+                    </div>
+                </div>
+            }
+            // trang thai khi đã có bản checkin rồi ! thì tạo okrcheckin mới
+            else if (okr_ne.status_checkin == 3) 
+            {
+                <div class="field is-grouped">
+                    <!--!--><div class="control">File đính kèm</div>
+                    <div class="control"><!--!--><div class="control file_upload" _bl_d4e78336-9e92-472b-af70-5e06d1d6ffc2=""><a class="button is-outlined is-link " onclick="document.getElementById('file_241N6EC7C4').click()" title="Chọn file" style="border-radius: 6px; width: 24px; height: 24px; padding: 0px;"><!--!--><span class="icon"><i class="material-icons-outlined is-size-6">upload</i></span></a><!--!--><input id="file_241N6EC7C4" class="is-hidden" multiple="" accept="*" type="file" _bl_01c234eb-7762-461d-b7e3-67aefcfa3709=""><!--!--><span style="opacity:0;pointer-events:none;position:absolute">Chọn file</span></div></div>
+                </div>
+
+                <!--!-->
+                <!--!-->
+
+                <ul style="" class="columns is-multiline is-vcentered is-variable is-1 is-mobile "></ul>
+
+                <div class="field is-grouped is-grouped-multiline mt-5">
+                    <div class="control" style="width: 650px;">
+                        <ul class="columns is-multiline is-vcentered is-mobile is-variable is-1">
+                            <!--!-->
+                            <li class="column is-narrow">
+                                Chọn quản lý check-in
+                            </li>
+                            <li class="column is-one-quarter">
+                                <!--!--><!--!--><div id="dropdown_1b84d67d" class="dropdown is-up  ">
+                                    <div class="dropdown-trigger">
+                                        <a class="icon-text">
+                                            <span class="has-text-link is-block" style="max-width: 200px;">Tất cả phòng ban</span><!--!-->
+                                            <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li><!--!-->
+                            <li class="column is-narrow">
+                                <!--!--><div class="control is-expanded has-icons-left has-icons-right has_suggest">
+                                    <input class="input is-rounded is-small" type="text" placeholder="Nhập tên nhân viên..." autocomplete="off"><!--!-->
+                                    <!--!--><span class="icon is-left"><i class="material-icons-outlined is-size-6">search</i></span>
+                                    <a class="is-hidden"><!--!--><i class="material-icons-outlined">close</i></a><!--!-->
+                                    <ul class="suggest"></ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><div class="control is-expanded has-text-right">
+                        <!--!--><a class="button is-white has-text-danger" onclick="goBack()"><span>Hủy nhập</span></a>
+                        <a class="button is-link" @onclick="CreateOkrCheckinNhap">
+                            <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">done</i></span>
+                            <!--!--><span>Hoàn tất</span>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</section>
+@code {
+    [CascadingParameter]
+    public MainLayout layoutmain{ get; set; }
+    [Parameter]
+    public string okrID { get; set; }
+    [Parameter]
+    public string idOkrCheckin { get; set; }
+    okrModel okr_ne = new();
+    OkrCheckInModel okr_checkin = new();
+    OkrCheckITimeModel checkTime = new();
+    List<OkrCheckInModel> listOkrCheckin = new();
+    OkrCheckInModel okrcheckinPre = new();
+    List<UseModel> listuser = new();
+    protected override async void OnInitialized()
+    {
+        listuser = await DbUse.GetAll();
+        okr_ne.id = okrID;
+        okr_checkin.id = idOkrCheckin;
+        okr_ne = await DbOkr.Get(okr_ne);
+        okr_checkin = await DbOkrCheckin.Get(okr_checkin);
+        checkTime.okr = okr_ne.id;
+        checkTime.date_checkin = okr_checkin.date_create;
+        checkTime = await DbOkrCheckinTime.GetTheoDateCreate(checkTime);
+        //listOkrCheckin = await DbOkrCheckin.GetListById(okr_checkin.okr);
+        okrcheckinPre.okr = okrID;
+        okrcheckinPre = await DbOkrCheckin.GetOkrCheckinEx(okrcheckinPre);
+        Console.WriteLine("okr lay duoc !!!!!");
+        if(okrcheckinPre == null)
+        {
+            okrcheckinPre = new();
+        }
+        //Console.WriteLine(okrcheckinPre.id);
+
+    }
+    // tạo checkin nháp
+    private async Task CreateOkrCheckinNhap()
+    {
+        okr_checkin.date_create = DateTime.Now.Ticks;
+        //okr_checkin.draft = false; 
+        DbOkr.Set_statusCheckin(okr_ne, 1);
+        DbOkrCheckin.Create(okr_checkin);
+    }
+    // cập nhật checkin nháp
+    private async void Update()
+    {
+        if(okr_checkin.user_checkin == null)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "phải có quản lý checkin");
+        }
+        else if(okr_checkin.confident == 0)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "phải điền độ tự tin");
+        }
+        else if (okr_checkin.user_checkin == okr_checkin.user_create)
+        {
+            JSRuntime.InvokeVoidAsync("tagline", false, "Bạn không thể tự gửi checkin cho chính mình");
+
+        }
+        else
+        {
+            if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Xác nhận cập nhật Okr  ?"))
+                return;
+         okr_ne.confident = okr_checkin.confident;
+        //okr_ne.date_checkin = DateTime.Now.Ticks;
+        //DbOkr.Set_statusCheckin(okr_ne, 3);
+        okr_checkin.progress_prev = @siuu(CanResult(), CanTargert()) - okrcheckinPre.progress_prev;
+        DbOkrCheckin.Update(okr_checkin);
+        navigation.NavigateTo("/okr/checkin");
+        }
+        
+
+    }
+    // phương thức tính
+    public double CanResult()
+    {
+        double result = 0;
+        @foreach (var i in okr_checkin.key_results)
+        {
+            result += i.result; 
+        }
+        return result;
+    }
+    private double CanTargert()
+    {
+        double targert = 0;
+        @foreach (var i in okr_checkin.key_results)
+        {
+            targert += i.target;
+        }
+        return targert;
+    }
+    private double siuu(double a, double b)
+    {
+        double result = a / b * 100;
+        return Math.Round(result, 2);
+    }
+    // XOá bản nháp
+    private async Task Delete()
+    {
+        if (await JSRuntime.InvokeAsync<bool>("confirm", $"Bạn có chắc muốn xóa kết quả then chốt: {okr_ne.name} ?"))
+        {
+            DbOkr.Set_statusCheckin(okr_ne, 0);
+            await DbOkrCheckin.Delete(idOkrCheckin);
+            navigation.NavigateTo("/okr/checkin");
+            DbOkrCheckinTime.Delete(checkTime.id);
+
+        }
+    }
+    //checkin OKr
+    public async void DoneOkr()
+    {
+       if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Bạn có chắc muốn xóa kết quả then chốt:  ?"))
+            return;
+        DbOkr.Set_statusCheckin(okr_ne, 3);
+        okr_checkin.date_checkin = DateTime.Now.Ticks;
+        okr_checkin.draft = true;
+        okr_checkin.progress_prev = @siuu(CanResult(), CanTargert()) ;
+        DbOkrCheckin.Update(okr_checkin);
+        DbOkr.SetDone(okr_ne);
+        navigation.NavigateTo("/okr/checkin");
+
+    }
+
+}

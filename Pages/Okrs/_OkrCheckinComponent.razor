@@ -1,0 +1,77 @@
+﻿@page "/okr/checkin/{okrID}/info"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager navigation
+
+  @*chính chủ vào xem okr *@
+@if (okr_ne.user_create == mainlayot.IdU)
+{
+    
+     if (okr_ne.status_checkin == 1 || okr_ne.status_checkin == 2 || okr_ne.status_checkin == 3 ||okr_ne.status_checkin == 0 || okr_ne.status_checkin == 4)
+    {
+        <_OkrEditCheckinNhap okr_checkin="okr_checkin" okr_ne="okr_ne" />
+    }
+}
+@*người khác vào xem okr *@
+else
+{
+    <CheckinOkrComponent okr_checkin="okr_checkin" okr_ne="okr_ne" />
+}
+
+@code {
+    [Parameter]
+    public string okrID { get; set; }
+    okrModel okr_ne = new();
+    [CascadingParameter]
+    public MainLayout mainlayot { get; set; }
+    OkrCheckInModel okr_checkin = new();
+    public string idOkr_checkin;
+    int index = 0;
+    protected override async void OnInitialized()
+    {
+        okr_ne.id = okrID;
+        okr_ne = await DbOkr.Get(okr_ne);
+        Console.WriteLine(okr_ne.name);
+        Console.WriteLine(okrID);
+        if (okr_ne.status_checkin != null  )
+        {
+            okr_checkin.okr = okrID;
+            //okr_checkin.date_create = okr_ne.;
+            okr_checkin = await DbOkrCheckin.GetTheoDateCreate(okr_checkin);
+            if(okr_checkin == null)
+            {
+                okr_checkin = new();
+            }
+        }
+        //@if(okr_checkin.checkin == true)
+        //    //idOkr_checkin = okr_checkin.id;
+    }
+    private double Cen(double a, double b)
+    {
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    private double CalPercent(List<okrModel.KeyResult> keys)
+    {
+        double result = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert(List<okrModel.KeyResult> keys)
+    {
+        double target = 0;
+
+        foreach (var key in keys)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+
+}

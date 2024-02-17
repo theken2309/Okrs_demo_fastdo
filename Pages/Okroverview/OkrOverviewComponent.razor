@@ -1,0 +1,314 @@
+﻿@page "/okr/checkin/{OkrID}/overview"
+@inject IJSRuntime JSRuntime 
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <div class="tabs">
+        <div class="tabs_name">
+            <a class="icon-tex px-0 has-text-link has-text-weight-normal is-size-6" href="/okr/checkin/">
+                <!--!--><span class="icon">
+                    <span class="material-icons-outlined">
+                        keyboard_backspace
+                    </span>
+                </span>
+                <!--!--><span>
+                    Trở về
+                </span>
+            </a><!--!-->
+            <!--!--><span class="icon-text">
+                <span>
+                    Chi tiết OKRs
+                </span>
+            </span>
+        </div><!--!-->
+        <ul>
+            <li class="is-active"><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/info">Check-in 1:1</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/@okr_checkin.id/feedback"><!--!-->Phản hồi</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/overview"><!--!-->Tổng quan</a></li>
+        </ul>
+    </div><section class="main_content" style="gap:0;">
+        <!--!--><div class="card flex_column">
+            <ul class="columns is-vcentered is-variable is-2 mb-2">
+                <li class="column is-narrow">
+                    <h1 class="title is-5 has-text-info">
+                        TIẾN ĐỘ OKRs
+                    </h1>
+                </li>
+            </ul>
+            <div style="flex:1" class="inner_section"><canvas id="lineChartCanvas" height="345" style="display: block; box-sizing: border-box; height: 306.667px; width: 1545.78px;" width="1739"></canvas></div>
+        </div>
+
+        <div class="card flex_column">
+            <ul class="columns is-vcentered is-variable is-2 mb-2">
+                <!--!-->
+                <li class="column">
+                    <h1 class="title is-5 has-text-info">
+                        CHI TIẾT OKRs
+                    </h1>
+                </li>
+            </ul><!--!-->
+            <div class="inner_section">
+                <table class="table is-fullwidth is-noborder is-responsive">
+                    <!--!-->
+                    <thead>
+                        <tr class="is-size-7" style="border-bottom: 1px solid #DEDEDE;">
+                            <th class="pt-0">Mục tiêu</th>
+                            <th class="pt-0" width="160px">Kết Quả Then Chốt</th>
+                            <th class="pt-0" width="200px" align="center">Tiến độ</th>
+                            <th class="pt-0" width="90px" align="center">Thay đổi</th>
+                            <th class="pt-0" width="90px" align="center">Tự tin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="is-flex"><span class="has-text-weight-semibold has-text-link">@okr_ne.name</span><!--!-->
+
+                            
+                                </div></td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Kết quả</label>
+                                <div class="td-value">
+                                    <a class="icon-text has-text-weight-semibold has-text-info">
+                                        <span> @okr_ne.key_results.Count()  <!--!--> kết quả</span><!--!-->
+                                        <!--!--><span class="icon"><i class="material-icons-outlined is-size-5">arrow_drop_down</i></span>
+                                    </a>
+                                </div>
+                            </td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Tiến độ</label>
+                                <div class="td-value">
+                                    <div class="progress_has_value">
+                                        <progress class="progress is-small is-success" value="@siuu(CalPercent(),CalPercentTagert())" max="100"></progress><!--!-->
+                                        <span> @siuu(CalPercent(),CalPercentTagert()) % </span>
+                                    </div>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Thay đổi</label>
+                                <div class="td-value has-text-weight-semibold">
+                                    @((decimal)okr_checkin.progress_prev) <!--!-->%
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value has-text-weight-semibold"><span class="has-text-success">
+                                     @if (okr_checkin.confident == 0)
+                                    {
+
+                                    }
+                                    else if (okr_checkin.confident == 1)
+                                    {
+                                        <span>
+                                            <span class="has-text-success">Rất tốt</span>
+                                        </span>
+                                    }
+                                    else if (okr_checkin.confident == 2)
+                                    {
+                                        <span>
+                                            <span class="has-text-warning">Ổn</span>
+                                        </span>
+                                    }
+                                    else if (okr_checkin.confident == 3)
+                                    {
+                                        <span>
+                                            <span class="has-text-danger">Không ổn</span>
+                                        </span>
+                                    }
+                                    </span></div>
+                            </td>
+                        </tr>
+                        @foreach(var okrci in okr_checkin.key_results)
+                        {
+                        <tr>
+                            <td class="pl-4"> @okrci.name </td><!--!-->
+                            <td class="pl-2"></td><!--!-->
+                            <td>
+                                <!--!--><label class="td-label">Đạt được</label>
+                                <div class="td-value">
+                                    <span class="has-text-success"> @okrci.result  / @okrci.target</span><!--!-->
+                                    <span class="is-pulled-right"> @siuu(okrci.result,okrci.target) %</span>
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Thay đổi</label>
+                                <div class="td-value">
+                                       
+                                </div>
+                            </td><!--!-->
+                            <td align="center">
+                                <!--!--><label class="td-label">Tự tin</label>
+                                <div class="td-value has-text-weight-semibold"><span class="has-text-success">
+                                                @if (okrci.confident == 0)
+                                                {
+
+                                                }
+                                                else if (okrci.confident == 1)
+                                                {
+                                                    <span>
+                                                        <span class="has-text-success">Rất tốt</span>
+                                                    </span>
+                                                }
+                                                else if (okrci.confident == 2)
+                                                {
+                                                    <span>
+                                                        <span class="has-text-warning">Ổn</span>
+                                                    </span>
+                                                }
+                                                else if (okrci.confident == 3)
+                                                {
+                                                    <span>
+                                                        <span class="has-text-danger">Không ổn</span>
+                                                    </span>
+                                                }
+                                        
+                                </span></div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</section>
+@*<div style="min-height: 210px;flex:1" class="inner_section pt-6"><!--!--><canvas id="lineChartCanvas" height="381" style="display: block; box-sizing: border-box; height: 338.667px; width: 1550.22px;" width="1744"></canvas></div>*@
+
+@code {
+    [Parameter]
+    public string OkrID { get; set; }
+    List<OkrCheckITimeModel> listTime = new();
+    okrModel okr_ne = new();
+    List<string> listDrawTime = new();
+    List<OkrCheckInModel> listOkrCheckin = new();
+    List<double> CanDraw = new();
+    OkrCheckInModel okr_checkin = new();
+    List<long> timeCheck = new();
+    private double tiendo = 0;
+    protected override async void OnInitialized()
+    {
+        okr_checkin = await DbOkrCheckin.GetByOkrID(OkrID);
+        if (okr_checkin == null) okr_checkin = new();
+        listTime = await DbOkrCheckinTime.GetAll();
+        okr_ne.id = OkrID;
+        //listOkrCheckin = await DbOkrCheckin.GetAll();
+        List<long> timeCheck = new();
+        //okr_checkin.id = idOkrCheckin;
+        okr_ne = await DbOkr.Get(okr_ne);
+        //okr_checkin = await DbOkrCheckin.Get(okr_checkin);
+        foreach(var item in listTime)
+        {
+            @if (item.okr == okr_ne.id && item.status == 2)
+            {
+                timeCheck.Add(item.date_checkin);
+                okr_checkin.date_create = item.date_checkin;
+                okr_checkin.okr = OkrID;
+                listOkrCheckin = await DbOkrCheckin.GetTheoTimeOutList(okr_checkin);
+                if (listOkrCheckin.Count > 0)
+                {
+                foreach (var okrcheckin in listOkrCheckin)
+                {
+                    int i = 0;
+
+                    double CalPercent()
+                    {
+                        double result = 0;
+
+                        foreach (var key in okrcheckin.key_results)
+                        {
+                            var k = key.result;
+                            result += k;
+                        }
+                        return result;
+                    }
+                    double CalPercentTagert()
+                    {
+                        double target = 0;
+
+                        foreach (var key in okrcheckin.key_results)
+                        {
+                            var k = key.target;
+                            target += k;
+                        }
+                        return target;
+                    }
+                    CanDraw.Add(siuu(CalPercent(), CalPercentTagert()));
+                    listDrawTime.Add(new DateTime(okrcheckin.date_checkin).ToString("dd/MM/yyyy"));
+                }
+                }
+                else
+                {
+                
+                }
+
+            }
+        }
+        okr_checkin.date_create = timeCheck.LastOrDefault();
+        okr_checkin.okr = OkrID;
+        okr_checkin = await DbOkrCheckin.GetTheoTime(okr_checkin);
+        if (okr_checkin == null) okr_checkin = new();
+        tiendo = CanDraw.LastOrDefault();
+        DrawLineChart();
+        if(okr_checkin == null)
+        {
+            Console.WriteLine("không có");
+        }
+        else
+        {
+         Console.WriteLine(okr_checkin.id);
+
+        }
+        Console.WriteLine(okr_checkin.id + "id okr checkin" + okr_checkin.id);
+        StateHasChanged();
+    }
+    //}
+    private void DrawLineChart()
+    {
+
+        var data = new
+        {
+            labels = listDrawTime,
+            datasets = new[]
+            {
+                new
+                {
+                    label = "Tiến Độ Checkin",
+                    data = CanDraw,
+                    borderColor = "rgba(75, 192, 192, 1)",
+                    fill = false,
+                }
+    }
+        };
+
+        JSRuntime.InvokeVoidAsync("drawLineChart", "lineChartCanvas", data);
+    }
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    double CalPercent()
+    {
+        double result = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    double CalPercentTagert()
+    {
+        double target = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+}

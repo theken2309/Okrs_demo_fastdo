@@ -1,0 +1,262 @@
+﻿@*Trang FB của okr đã có dữ liệu checkin *@
+<section id="content" class="column has_sidebar ">
+    <!--!--><!--!--><!--!--><!--!-->
+
+    <div class="tabs">
+        <div class="tabs_name">
+            <a class="icon-text px-0 has-text-link has-text-weight-normal is-size-6" href="/okr/checkin">
+                <!--!--><span class="icon">
+                    <span class="material-icons-outlined">
+                        keyboard_backspace
+                    </span>
+                </span>
+                <!--!--><span>
+                    Trở về
+                </span>
+            </a><!--!-->
+            <!--!--><span class="icon-text">
+                <span>
+                    Chi tiết OKRs
+                </span>
+            </span>
+        </div><!--!-->
+        <ul>
+            <li class="is-active"><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/info">Check-in 1:1</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/@okr_checkin.id/feedback"><!--!-->Phản hồi</a></li><!--!-->
+            <li class=""><a class="has-text-weight-normal" href="/okr/checkin/@okr_ne.id/overview"><!--!-->Tổng quan</a></li>
+        </ul>
+    </div><section class="main_content">
+        <div class="card">
+            <ul class="columns is-vcentered is-variable is-2 mb-2">
+                <!--!-->
+                <li class="column">
+                    <h1 class="title is-5 has-text-info">
+                        PHẢN HỒI CHECK-IN
+                    </h1>
+                </li>
+                <li class="column is-narrow">
+                    <div class="field is-grouped">
+                        <!--!--><div class="control has-text-weight-semibold">
+                            Chu kỳ Check-in:
+                        </div>
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select @onchange = "Xem" >
+                                    @foreach (var item in listTime)
+                                    {
+                                        @if(item.okr == okr_ne.id && item.status == 2)
+                                        {
+                                            
+                                        <option value="@item.date_checkin" > @(new DateTime(item.date_checkin).ToString("dd/MM/yyyy")) </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul><!--!-->
+            <div class="inner_section">
+                <div id="feedback" class="scrolly" style="height: calc(100vh - 282px);">
+                    <table class="table is-fullwidth is-vcentered is-noborder is-responsive">
+                        <!--!-->
+                        <thead>
+                            <tr>
+                                <th>Mục tiêu</th>
+                                <th width="200px" align="center">Tiến độ</th>
+                                <th width="100px" align="center">Thay đổi</th>
+                                <th width="70px" align="center" class="pl-0">Tự tin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="is-flex"><span class="has-text-weight-semibold has-text-link"> @okr_ne.name  </span><!--!--><span class="ml-1 icon" title="OKRs đã hoàn thành"><i class="material-icons-outlined is-size-6 has-text-success">check_circle</i></span></div></td><!--!-->
+                                <td>
+                                    <!--!--><label class="td-label">Tiến độ</label>
+                                    <div class="td-value">
+                                        <div class="progress_has_value">
+                                            <progress class="progress is-small is-success" value="@siuu(CalPercent(),CalPercentTagert())" max="100"></progress><!--!-->
+                                            <span> @siuu(CalPercent(),CalPercentTagert()) %  </span>
+                                        </div>
+                                    </div>
+                                </td><!--!-->
+                                <td align="center">
+                                    <!--!--><label class="td-label">Thay đổi</label>
+                                    <div class="td-value has-text-weight-semibold">
+                                        0<!--!-->%
+                                    </div>
+                                </td><!--!-->
+                                <td align="center" class="pl-0">
+                                    <!--!--><label class="td-label">Tự tin</label>
+                                    <div class="td-value has-text-weight-semibold">
+                                        @if (okr_ne.confident == 0)
+                                        {
+
+                                        }
+                                        else if (okr_ne.confident == 1)
+                                        {
+                                            <span>
+                                                <span class="has-text-success">Rất tốt</span>
+                                            </span>
+                                        }
+                                        else if (okr_ne.confident == 2)
+                                        {
+                                            <span>
+                                                <span class="has-text-warning">Ổn</span>
+                                            </span>
+                                        }
+                                        else if (okr_ne.confident == 3)
+                                        {
+                                            <span>
+                                                <span class="has-text-danger">Không ổn</span>
+                                            </span>
+                                        }
+
+                                    </div>
+                                </td>
+                            </tr><!--!-->
+                            <!--!-->
+                            @foreach(var iteam in okr_checkin.key_results)
+                            {
+                                <tr class="tr-hide"><td colspan="4"><hr class="m-0"></td></tr>
+                                <tr><td colspan="4"><span class="has-text-weight-semibold has-text-link">@iteam.name</span></td></tr>
+
+                                <!--!-->
+                                <tr>
+                                    <td colspan="3" class="pr-0"><div class="has_bg is_radius p-3 is-word-break"><!--!--> @iteam.feedback </div></td><!--!-->
+                                    <td align="center" class="pl-0"><a class="icon has-text-link" title="Trả lời phản hồi"><!--!--><i class="material-icons-outlined is-size-5">reply</i></a></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="4" class="pt-3 pr-3">
+                                    <ul class="columns is-multiline is-mobile">
+                                     @foreach (var item in okr_checkin.feedbacks)
+                                        {
+                                            @if(item.user == layoutMain.IdU)
+                                            {
+                                                <li class="column is-two-fifths is-hidden-mobile"></li>
+                                                <li class="column is-three-fifths-tablet is-full-mobile">
+                                                    <div class="has-background-link has-text-white is-word-break p-3 is_radius"><!--!--> @item.content  </div><!--!-->
+                                                    <div class="is-clearfix"></div>
+                                                    <div class="is-size-7 has-text-right pt-1">@(new DateTime(item.date).ToString("HH:mm - dd/MM/yyyy"))</div>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="column is-three-fifths-tablet is-full-mobile">
+                                                    <div class="user_item mb-2">
+                                                        <img class="image is-24x24 mr-2" src="https://storage.googleapis.com/fastdo-storage.appspot.com/avatar/23AIB54C6F_01de545b-964f-4c07-ad2c-0f357b16512d.png" alt="IMG"><!--!-->
+                                                        <span class="has-text-weight-medium"> @item.user </span>
+                                                    </div><div class="has_bg is-word-break is-pulled-left p-3 is_radius"><!--!--> @item.content  </div><!--!-->
+                                                    <div class="is-clearfix"></div>
+                                                    <div class="is-size-7 has-text-left pt-1"> @(new DateTime(item.date).ToString("HH:mm - dd/MM/yyyy")) </div>
+                                                </li>
+
+                                                <!--!-->
+                                                <li class="column is-two-fifths is-hidden-mobile"></li>
+
+                                                <!--!-->
+                                            }
+                                        }  
+                                    </ul>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div><!--!-->
+                <div class="field pr-3" style="height: 60px;"></div><!--!-->
+                <div class="field is-grouped pr-3" style="height: 75px;">
+                    <div class="control is-expanded has-icons-right">
+                        <textarea @bind="@feedback.content" id="replyInput" class="textarea scrolly" rows="1" placeholder="Nội dung phản hồi..." style="height: 33px; overflow: hidden;"></textarea><!--!-->
+                        <!--!--><a class="icon is-right has-text-link" onclick="document.getElementById('file').click()" title="Đính kèm hình ảnh" style="pointer-events: auto;"><i class="material-icons-outlined is-size-5">image</i></a>
+                        <div class="is-hidden"><!--!--><div class="control file_upload" _bl_643b7cea-b1a9-44ab-88ff-b2bdbe6797ca=""><a class="button is-outlined has-text-link " onclick="document.getElementById('file').click()" title="Chọn file"><!--!--><span class="icon"><i class="material-icons-outlined is-size-5">upload</i></span></a><!--!--><input id="file" class="is-hidden" accept="image/*" type="file" _bl_3cfc1881-cdd4-4a9b-a8ac-7f7e49fd1bbc=""><!--!--><span style="opacity:0;pointer-events:none;position:absolute">Chọn file</span></div></div>
+                    </div><!--!-->
+                    <div class="control">
+                        <a class="button is-link" @onclick= "AddFb" >
+                            <!--!--><span class="icon"><i class="material-icons-outlined is-size-6">send</i></span>
+                            <!--!--><span>Gửi</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+@code {
+    [CascadingParameter]
+    public MainLayout layoutMain { get; set; }
+    [Parameter]
+    public string okrID{ get; set; }
+    [Parameter]
+    public string idOkrCheckin { get; set; }
+    okrModel okr_ne = new();
+    OkrCheckInModel okr_checkin = new();
+    OkrCheckInModel.Feedback feedback = new OkrCheckInModel.Feedback
+        {
+            id = MongoDb.RandomId(),
+        };
+    List<OkrCheckITimeModel> listTime = new();
+    protected override async void OnInitialized()
+    {
+        listTime =await DbOkrCheckinTime.GetAll();
+        okr_ne.id = okrID;
+        okr_checkin.id = idOkrCheckin;
+        okr_ne = await DbOkr.Get(okr_ne);
+        okr_checkin = await DbOkrCheckin.Get(okr_checkin);
+
+    }
+    private async Task Xem(ChangeEventArgs e)
+    {
+        Console.WriteLine("alolo");
+        Console.WriteLine(okr_checkin.id);
+
+        var value = e.Value.ToString();
+        if (!string.IsNullOrEmpty(value) && long.TryParse(value, out var date_check) && okr_checkin != null)
+        {
+            okr_checkin.date_create = date_check;
+            okr_checkin = await DbOkrCheckin.GetTheoTime(okr_checkin);
+            Console.WriteLine(okr_checkin == null);
+            //Console.WriteLine(timeCheck);
+        }
+    }
+    // các phương thức tính
+    private double CalPercent()
+    {
+        double result = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.result;
+            result += k;
+        }
+        return result;
+    }
+    private double CalPercentTagert()
+    {
+        double target = 0;
+
+        foreach (var key in okr_checkin.key_results)
+        {
+            var k = key.target;
+            target += k;
+        }
+        return target;
+    }
+    private double siuu(double a, double b)
+    {
+        if (a == 0 || b == 0)
+            return 0;
+        double result = a / b * 100;
+        if (result > 100) result = 100;
+        return Math.Round(result, 2);
+    }
+    // Thêm Feedback
+    private async void AddFb()
+    {
+        okr_checkin.feedbacks.Add(feedback);
+        feedback.date = DateTime.Now.Ticks;
+        feedback.user = layoutMain.IdU;
+        DbOkrCheckin.SetFeedbacks(okr_checkin);
+    }
+}

@@ -1,0 +1,973 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\OKRs_Fastdo.bundle.scp.css",
+      "PackagePath": "staticwebassets\\OKRs_Fastdo.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\Connect.min.css",
+      "PackagePath": "staticwebassets\\css\\Connect.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\animate.min.css",
+      "PackagePath": "staticwebassets\\css\\animate.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\appv2.10.css",
+      "PackagePath": "staticwebassets\\css\\appv2.10.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\appv2.10.min.css",
+      "PackagePath": "staticwebassets\\css\\appv2.10.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\appv2.10.scss",
+      "PackagePath": "staticwebassets\\css\\appv2.10.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\bingmap.css",
+      "PackagePath": "staticwebassets\\css\\bingmap.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\bingmap.min.css",
+      "PackagePath": "staticwebassets\\css\\bingmap.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\bingmap.scss",
+      "PackagePath": "staticwebassets\\css\\bingmap.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\bulma.min.css",
+      "PackagePath": "staticwebassets\\css\\bulma.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\component.css",
+      "PackagePath": "staticwebassets\\css\\component.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\connect.css",
+      "PackagePath": "staticwebassets\\css\\connect.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\connect.scss",
+      "PackagePath": "staticwebassets\\css\\connect.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\custom.css",
+      "PackagePath": "staticwebassets\\css\\custom.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\custom.min.css",
+      "PackagePath": "staticwebassets\\css\\custom.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\custom.scss",
+      "PackagePath": "staticwebassets\\css\\custom.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\dragdrop.css",
+      "PackagePath": "staticwebassets\\css\\dragdrop.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\effect.css",
+      "PackagePath": "staticwebassets\\css\\effect.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\icon.material.css",
+      "PackagePath": "staticwebassets\\css\\icon.material.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\iconmaterial\\MaterialIcons-Regular.ttf",
+      "PackagePath": "staticwebassets\\css\\iconmaterial\\MaterialIcons-Regular.ttf"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\iconmaterial\\MaterialIconsOutlined-Regular.otf",
+      "PackagePath": "staticwebassets\\css\\iconmaterial\\MaterialIconsOutlined-Regular.otf"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\iconmaterial\\MaterialIconsRound-Regular.otf",
+      "PackagePath": "staticwebassets\\css\\iconmaterial\\MaterialIconsRound-Regular.otf"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\iconmaterial\\MaterialIconsSharp-Regular.otf",
+      "PackagePath": "staticwebassets\\css\\iconmaterial\\MaterialIconsSharp-Regular.otf"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\iconmaterial\\MaterialIconsTwoTone-Regular.otf",
+      "PackagePath": "staticwebassets\\css\\iconmaterial\\MaterialIconsTwoTone-Regular.otf"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\kpis.css",
+      "PackagePath": "staticwebassets\\css\\kpis.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mail\\mail-component.scss",
+      "PackagePath": "staticwebassets\\css\\mail\\mail-component.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mail\\mail-nav.scss",
+      "PackagePath": "staticwebassets\\css\\mail\\mail-nav.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mail\\mail.css",
+      "PackagePath": "staticwebassets\\css\\mail\\mail.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mail\\mail.min.css",
+      "PackagePath": "staticwebassets\\css\\mail\\mail.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mail\\mail.scss",
+      "PackagePath": "staticwebassets\\css\\mail\\mail.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\meeting.css",
+      "PackagePath": "staticwebassets\\css\\meeting.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mention.css",
+      "PackagePath": "staticwebassets\\css\\mention.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mention.min.css",
+      "PackagePath": "staticwebassets\\css\\mention.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mention.scss",
+      "PackagePath": "staticwebassets\\css\\mention.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\mobile.css",
+      "PackagePath": "staticwebassets\\css\\mobile.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\profile.css",
+      "PackagePath": "staticwebassets\\css\\profile.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\profile.min.css",
+      "PackagePath": "staticwebassets\\css\\profile.min.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\profile.scss",
+      "PackagePath": "staticwebassets\\css\\profile.scss"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\quill.bubble.css",
+      "PackagePath": "staticwebassets\\css\\quill.bubble.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\quill.snow.css",
+      "PackagePath": "staticwebassets\\css\\quill.snow.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\storage.css",
+      "PackagePath": "staticwebassets\\css\\storage.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\css\\timekeeping.css",
+      "PackagePath": "staticwebassets\\css\\timekeeping.css"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\a.png",
+      "PackagePath": "staticwebassets\\images\\a.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achi_cfrs.png",
+      "PackagePath": "staticwebassets\\images\\achi_cfrs.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achi_educate.png",
+      "PackagePath": "staticwebassets\\images\\achi_educate.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achi_kaizen.png",
+      "PackagePath": "staticwebassets\\images\\achi_kaizen.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achi_new.gif",
+      "PackagePath": "staticwebassets\\images\\achi_new.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achi_todolist.png",
+      "PackagePath": "staticwebassets\\images\\achi_todolist.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\1.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\1.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\10.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\10.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\11.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\11.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\12.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\12.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\13.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\13.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\14.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\14.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\15.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\15.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\16.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\16.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\17.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\17.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\2.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\2.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\3.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\3.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\4.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\4.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\5.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\5.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\6.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\6.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\7.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\7.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\8.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\8.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\achievement\\9.gif",
+      "PackagePath": "staticwebassets\\images\\achievement\\9.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\arrow_sub.png",
+      "PackagePath": "staticwebassets\\images\\arrow_sub.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\avatar.png",
+      "PackagePath": "staticwebassets\\images\\avatar.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\bg_cop1.png",
+      "PackagePath": "staticwebassets\\images\\bg_cop1.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\bg_cop2.png",
+      "PackagePath": "staticwebassets\\images\\bg_cop2.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\bg_cop3.png",
+      "PackagePath": "staticwebassets\\images\\bg_cop3.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\bg_login.gif",
+      "PackagePath": "staticwebassets\\images\\bg_login.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\bg_product.png",
+      "PackagePath": "staticwebassets\\images\\bg_product.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\buy-module.png",
+      "PackagePath": "staticwebassets\\images\\buy-module.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\cancel_icon.png",
+      "PackagePath": "staticwebassets\\images\\cancel_icon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\certificate.png",
+      "PackagePath": "staticwebassets\\images\\certificate.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\check_icon.png",
+      "PackagePath": "staticwebassets\\images\\check_icon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\clock.png",
+      "PackagePath": "staticwebassets\\images\\clock.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\cover-2022.png",
+      "PackagePath": "staticwebassets\\images\\cover-2022.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\cover_products.png",
+      "PackagePath": "staticwebassets\\images\\cover_products.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\default.jpg",
+      "PackagePath": "staticwebassets\\images\\default.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\banner-chao-mung.png",
+      "PackagePath": "staticwebassets\\images\\demo\\banner-chao-mung.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\chung-chi.jpg",
+      "PackagePath": "staticwebassets\\images\\demo\\chung-chi.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-ao-quan.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-ao-quan.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-ban-hang.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-ban-hang.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-do-an.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-do-an.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-hoi-nhap.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-hoi-nhap.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-khac.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-khac.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-san-xuat.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-san-xuat.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-tai-chinh.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-tai-chinh.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-van-hanh-quan-ly.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-van-hanh-quan-ly.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\danh-muc-vpp.png",
+      "PackagePath": "staticwebassets\\images\\demo\\danh-muc-vpp.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\kaizen-csht.png",
+      "PackagePath": "staticwebassets\\images\\demo\\kaizen-csht.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\kaizen-idea.png",
+      "PackagePath": "staticwebassets\\images\\demo\\kaizen-idea.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\kaizen-nangsuat.png",
+      "PackagePath": "staticwebassets\\images\\demo\\kaizen-nangsuat.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\kaizen-sanpham.png",
+      "PackagePath": "staticwebassets\\images\\demo\\kaizen-sanpham.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\poster-workdo.png",
+      "PackagePath": "staticwebassets\\images\\demo\\poster-workdo.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\san-pham-ao.jpg",
+      "PackagePath": "staticwebassets\\images\\demo\\san-pham-ao.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\san-pham-but-bi.jpg",
+      "PackagePath": "staticwebassets\\images\\demo\\san-pham-but-bi.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\san-pham-com.jpg",
+      "PackagePath": "staticwebassets\\images\\demo\\san-pham-com.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\san-pham-iphone.jpeg",
+      "PackagePath": "staticwebassets\\images\\demo\\san-pham-iphone.jpeg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\demo\\san-pham-tra-sua.jpg",
+      "PackagePath": "staticwebassets\\images\\demo\\san-pham-tra-sua.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\end-meeting.png",
+      "PackagePath": "staticwebassets\\images\\end-meeting.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\excel_icon.png",
+      "PackagePath": "staticwebassets\\images\\excel_icon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\favicon.ico",
+      "PackagePath": "staticwebassets\\images\\favicon.ico"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\images\\favicon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\doc.png",
+      "PackagePath": "staticwebassets\\images\\files\\doc.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\image.png",
+      "PackagePath": "staticwebassets\\images\\files\\image.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\music.png",
+      "PackagePath": "staticwebassets\\images\\files\\music.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\pdf.png",
+      "PackagePath": "staticwebassets\\images\\files\\pdf.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\ppt.png",
+      "PackagePath": "staticwebassets\\images\\files\\ppt.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\svg.png",
+      "PackagePath": "staticwebassets\\images\\files\\svg.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\txt.png",
+      "PackagePath": "staticwebassets\\images\\files\\txt.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\video.png",
+      "PackagePath": "staticwebassets\\images\\files\\video.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\xls.png",
+      "PackagePath": "staticwebassets\\images\\files\\xls.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\files\\zip.png",
+      "PackagePath": "staticwebassets\\images\\files\\zip.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\gift.gif",
+      "PackagePath": "staticwebassets\\images\\gift.gif"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\gift.png",
+      "PackagePath": "staticwebassets\\images\\gift.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\gift_box.png",
+      "PackagePath": "staticwebassets\\images\\gift_box.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon-1.png",
+      "PackagePath": "staticwebassets\\images\\icon-1.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon-2.png",
+      "PackagePath": "staticwebassets\\images\\icon-2.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon-3.png",
+      "PackagePath": "staticwebassets\\images\\icon-3.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon-4.png",
+      "PackagePath": "staticwebassets\\images\\icon-4.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon-achievement.png",
+      "PackagePath": "staticwebassets\\images\\icon-achievement.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\Icon - Loading.png",
+      "PackagePath": "staticwebassets\\images\\icon\\Icon - Loading.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\Union.png",
+      "PackagePath": "staticwebassets\\images\\icon\\Union.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\ai.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\ai.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\doc.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\doc.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\img.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\img.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\music.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\music.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\other.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\other.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\pdf.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\pdf.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\ppt.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\ppt.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\psd.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\psd.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\svg.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\svg.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\txt.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\txt.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\video.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\video.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\xls.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\xls.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\extension\\zip.png",
+      "PackagePath": "staticwebassets\\images\\icon\\extension\\zip.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fCMS.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fCMS.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fCfr.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fCfr.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fEdu.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fEdu.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fKaizen.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fKaizen.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fKpis.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fKpis.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fMeeting.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fMeeting.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fOKRs.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fOKRs.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fProfile.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fProfile.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fSpace.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fSpace.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fTimekeeping.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fTimekeeping.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fTodo.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fTodo.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fWork.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fWork.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\folder.png",
+      "PackagePath": "staticwebassets\\images\\icon\\folder.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\folder_empty.png",
+      "PackagePath": "staticwebassets\\images\\icon\\folder_empty.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\icon\\fstorage.png",
+      "PackagePath": "staticwebassets\\images\\icon\\fstorage.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\addmoney.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\addmoney.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\admin.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\admin.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\banner.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\banner.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\cash.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\cash.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\customer.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\customer.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\delete.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\delete.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\editproduct.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\editproduct.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fcfr.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fcfr.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fkaizen.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fkaizen.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fkpis.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fkpis.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fmeeting.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fmeeting.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fokrs.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fokrs.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fprofile.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fprofile.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fspace.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fspace.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fstorage.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fstorage.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\ftimekeeping.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\ftimekeeping.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\ftodolist.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\ftodolist.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\ftrain.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\ftrain.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\fwork.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\fwork.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\org.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\org.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\processing.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\processing.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\promotion.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\promotion.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\refresh.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\refresh.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\security.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\security.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\settings.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\settings.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\success.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\success.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\team.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\team.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\tutorial-1.4.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\tutorial-1.4.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\tutorial-2.4.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\tutorial-2.4.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\tutorial-3.4.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\tutorial-3.4.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\tutorial-4.4.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\tutorial-4.4.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\upgrade.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\upgrade.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\illustrations\\users.png",
+      "PackagePath": "staticwebassets\\images\\illustrations\\users.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\kpis-icon.png",
+      "PackagePath": "staticwebassets\\images\\kpis-icon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\line.png",
+      "PackagePath": "staticwebassets\\images\\line.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\location-setup.jpg",
+      "PackagePath": "staticwebassets\\images\\location-setup.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\login\\1.png",
+      "PackagePath": "staticwebassets\\images\\login\\1.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\login\\2.png",
+      "PackagePath": "staticwebassets\\images\\login\\2.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\login\\3.png",
+      "PackagePath": "staticwebassets\\images\\login\\3.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\login\\4.png",
+      "PackagePath": "staticwebassets\\images\\login\\4.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\logo-white.png",
+      "PackagePath": "staticwebassets\\images\\logo-white.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\blogs.png",
+      "PackagePath": "staticwebassets\\images\\modules\\blogs.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\cfrs.png",
+      "PackagePath": "staticwebassets\\images\\modules\\cfrs.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\checkin.png",
+      "PackagePath": "staticwebassets\\images\\modules\\checkin.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\config.png",
+      "PackagePath": "staticwebassets\\images\\modules\\config.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\educate.png",
+      "PackagePath": "staticwebassets\\images\\modules\\educate.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\email.png",
+      "PackagePath": "staticwebassets\\images\\modules\\email.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\feedback.png",
+      "PackagePath": "staticwebassets\\images\\modules\\feedback.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\gift.png",
+      "PackagePath": "staticwebassets\\images\\modules\\gift.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\group.png",
+      "PackagePath": "staticwebassets\\images\\modules\\group.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\home.png",
+      "PackagePath": "staticwebassets\\images\\modules\\home.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\kaizen.png",
+      "PackagePath": "staticwebassets\\images\\modules\\kaizen.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\kpis.png",
+      "PackagePath": "staticwebassets\\images\\modules\\kpis.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\meeting.png",
+      "PackagePath": "staticwebassets\\images\\modules\\meeting.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\okrs.png",
+      "PackagePath": "staticwebassets\\images\\modules\\okrs.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\profile.png",
+      "PackagePath": "staticwebassets\\images\\modules\\profile.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\report.png",
+      "PackagePath": "staticwebassets\\images\\modules\\report.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\teams.png",
+      "PackagePath": "staticwebassets\\images\\modules\\teams.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\todolist.png",
+      "PackagePath": "staticwebassets\\images\\modules\\todolist.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\modules\\work.png",
+      "PackagePath": "staticwebassets\\images\\modules\\work.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\no-comment.png",
+      "PackagePath": "staticwebassets\\images\\no-comment.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\no-gps.png",
+      "PackagePath": "staticwebassets\\images\\no-gps.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\no-history.png",
+      "PackagePath": "staticwebassets\\images\\no-history.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\no-location.png",
+      "PackagePath": "staticwebassets\\images\\no-location.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\no-mobile.png",
+      "PackagePath": "staticwebassets\\images\\no-mobile.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\notifications.svg",
+      "PackagePath": "staticwebassets\\images\\notifications.svg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\pin-icon.png",
+      "PackagePath": "staticwebassets\\images\\pin-icon.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\problem-fmeeting.png",
+      "PackagePath": "staticwebassets\\images\\problem-fmeeting.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\promotion.jpg",
+      "PackagePath": "staticwebassets\\images\\promotion.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\section-noti-fmeeting.jpg",
+      "PackagePath": "staticwebassets\\images\\section-noti-fmeeting.jpg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\summary-fmeeting.png",
+      "PackagePath": "staticwebassets\\images\\summary-fmeeting.png"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\todo_bg1.svg",
+      "PackagePath": "staticwebassets\\images\\todo_bg1.svg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\images\\todo_bg2.svg",
+      "PackagePath": "staticwebassets\\images\\todo_bg2.svg"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\bingmap.js",
+      "PackagePath": "staticwebassets\\js\\bingmap.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\boot.js",
+      "PackagePath": "staticwebassets\\js\\boot.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\chart.min.js",
+      "PackagePath": "staticwebassets\\js\\chart.min.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\clientreport.js",
+      "PackagePath": "staticwebassets\\js\\clientreport.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\inputFileDropzone.js",
+      "PackagePath": "staticwebassets\\js\\inputFileDropzone.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\mention.js",
+      "PackagePath": "staticwebassets\\js\\mention.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\quill.js",
+      "PackagePath": "staticwebassets\\js\\quill.js"
+    },
+    {
+      "Id": "E:\\Intern_Fastdo\\OKRs_Fastdo\\OKRs_Fastdo\\wwwroot\\js\\test.js",
+      "PackagePath": "staticwebassets\\js\\test.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.OKRs_Fastdo.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.OKRs_Fastdo.props",
+      "PackagePath": "build\\OKRs_Fastdo.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.OKRs_Fastdo.props",
+      "PackagePath": "buildMultiTargeting\\OKRs_Fastdo.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.OKRs_Fastdo.props",
+      "PackagePath": "buildTransitive\\OKRs_Fastdo.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
